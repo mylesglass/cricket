@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<!--
+	This is some funky fresh work by
+	  Ewan Moshi &
+	  Myles Glass
+	  2015
+	Created for
+	  Victoria University of Wellington
+	  Software Engineering
+	  303 User Interface
+	  Assignment 4
+	If you think this is amazing, hire us
+
+	p.s. if you're using internet explorer, you might have a bad time
+-->
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Cricket</title>
+
+        <!-- StyleSheets -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
+
+    </head>
+
+    <body>
+	<!-- Main Container -->
+    </body>
+
+      <script src="http://d3js.org/d3.v3.min.js"></script>
+
+
+			<script>
+			var w = 800;
+			var h = 400;
+			var padding = 20;
+			var border=1;
+			var bordercolor='black';
+
+			var svg = d3.select("body")
+									.append("svg")
+									.attr("width", w)
+									.attr("height", h)
+									.attr("border",border);
+
+			var borderPath = svg.append("rect").attr("x", 0)
+																       		.attr("y", 0)
+																       		.attr("height", h)
+																       		.attr("width", w)
+																       		.style("stroke", bordercolor)
+																       		.style("fill", "none")
+																       		.style("stroke-width", border);
+
+			</script>
+
+			<script src="loading.js"></script>
+			<script src="js/libs/jquery.js"></script>
+			<script src="js/libs/jquery-csv.js"></script>
+			<script src="js/libs/bootstrap.js"></script>
+			<script src="js/libs/d3.js"></script>
+</html>
