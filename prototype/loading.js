@@ -1,21 +1,21 @@
 var textFile=[];
 var arrayFile=[]; //if you want the variable to be global, remove "var"
-store("2008-Table1.csv");
+store("data/2008-Table1.csv");
+
 
 function store(text){
-
-
     var csvFile= new XMLHttpRequest();
     csvFile.open("GET", text, false);
     csvFile.onreadystatechange= function()
     {
-     if(csvFile.readyState===4){
-         if(csvFile.statue===200||csvFile.status==0){
-           textFile=csvFile.responseText;
-
+     if(csvFile.readyState === 4){
+         if(csvFile.statue === 200 || csvFile.status == 0){
+           textFile = csvFile.responseText;
+           document.getElementById("textSection").innerHTML = allText;
          }
      }
-    }
+   };
+
 
     csvFile.send(null);
 
@@ -42,7 +42,7 @@ function store(text){
     }
     //this leaves several empty values which need to be removed also
     arrayFile = arrayFile.filter(Boolean);
-    jsonify();
+    //jsonify();
 }
 
 
