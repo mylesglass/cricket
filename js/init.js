@@ -150,9 +150,10 @@ function buildTeams() {
             // add wins, losses, draws, and points
             if (game.hometeam === team && game.homescore > game.awayscore) {
                 wins++;
-                points += 3;
+                points += 2;
             } else if(game.awayteam == team && game.awayscore > game.homescore) {
                 wins++;
+                points += 2;
             } else if(game.homescore === 'draw') {
                 draws++;
             } else if(game.hometeam === team && game.homescore < game.awayscore ||
