@@ -117,6 +117,15 @@ function parseDataFile(file, year) {
                 ascore = parseInt(score.substr(3,5));
             }
 
+            // calculate winner of game
+            var winner;
+            if(hscore > ascore) {
+                winner = d['Home Team'];
+            } else if (ascore > hscore) {
+                winner = d['Away Team'];
+            } else {
+                winner = 'draw';
+            }
 
             // Create game objects for each
             var game = {
@@ -126,6 +135,7 @@ function parseDataFile(file, year) {
                 time : d['Time'],   // Note, time may be undefined
                 hometeam : d['Home Team'],
                 awayteam : d['Away Team'],
+                winner : winner,
                 homescore : hscore,    // I'm assuming no one scores over 100 lol
                 awayscore : ascore,
                 venue : d['Venue']
