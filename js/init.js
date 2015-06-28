@@ -10,6 +10,7 @@ var DATAPATH = 'data/';
 
 var RAWDATA;
 
+var TEAM_NAMES = [];
 var TEAMS = [];
 
 var GAMES = [];
@@ -26,9 +27,9 @@ $(function() {
         var file = DATAPATH + year + '-Table1.csv';
 
         parseDataFile(file, year);
+
     }
 
-    printTeams();
 
 
 });
@@ -54,22 +55,21 @@ function parseDataFile(file, year) {
         RAWDATA.forEach(function(d) {
 
             // Check if Team is already in list, if not, add it
-            console.log("Constructing Team List");
-            if($.inArray((d['Home Team']), TEAMS) == -1) {
-                TEAMS.push(d['Home Team']);
+            if($.inArray((d['Home Team']), TEAM_NAMES) == -1) {
+                TEAM_NAMES.push(d['Home Team']);
             }
-            if($.inArray((d['Away Team']), TEAMS) == -1) {
-                TEAMS.push(d['Away Team']);
+            if($.inArray((d['Away Team']), TEAM_NAMES) == -1) {
+                TEAM_NAMES.push(d['Away Team']);
             }
 
-            //
+            // calc scores
             var score = d['Score'];
             var hscore, ascore;
-
+            // if draw, fuck it
             if(score.substr(0,4) === 'draw') {
                 hscore = 'draw';
                 ascore = 'draw';
-            } else {
+            } else {    // split string, and parse for int
                 hscore = parseInt(score.substr(0,2));
                 ascore = parseInt(score.substr(3,5));
             }
@@ -87,19 +87,66 @@ function parseDataFile(file, year) {
                 venue : d['Venue']
             };
 
-            GAMES.push(game);
+            GAMES.push(game); // add to array of games
 
 
         });
 
-        console.log(TEAMS);
+        console.log(TEAM_NAMES);
         console.log(GAMES[0]);
+        buildTeams();
 
     });
+
+    console.log("Data File Parsed.")
 }
 
-function printTeams() {
-    TEAMS.forEach(function printTeam(value) {
-        $('#vis').append('<h5>'+value'</h5>');
+function buildTeams() {
+
+    // for each unique team we found on file
+    TEAM_NAMES.forEach(function(team) {
+
+        // create a bunch of variables
+        var venue, country;
+        var wins = 0;
+        var losses = 0;
+        var draws = 0;
+        var points = 0;
+
+        // TODO points
+
+        // for each game
+        GAMES.forEach(function(game) {
+            // find home pitch if not already found
+            if(venue === undefined && team === game.hometeam) {
+                venue = game.venue;
+            }
+            // add wins, losses, draws, and points
+            if (game.hometeam === team && game.homescore > game.awayscore) {
+                wins++;
+                points += 3;
+            } else if(game.awayteam == team && game.awayscore > game.homescore) {
+                wins++;
+            } else if(game.homescore === 'draw') {
+                draws++;
+            } else if(game.hometeam === team && game.homescore < game.awayscore ||
+                        game.awayteam === team && game.awayscore < game.homescore){
+                losses++;
+            }
+        });
+
+        // create team object
+        var tempTeam = {
+            name : team,
+            venue : venue,
+            country : country,
+            wins : wins,
+            losses : losses,
+            draws : draws,
+            points : points
+        };
+
+        // add to team list.
+        TEAMS.push(tempTeam);
     });
 }
