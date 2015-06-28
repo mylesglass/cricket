@@ -61,7 +61,7 @@ function TeamView() {
 
 
 
-	//TeamViewUpdate(prompt('Team', 'Northern Mystics'));
+	TeamViewUpdate(prompt('Team', 'Northern Mystics'));
 
 	
 
