@@ -7,13 +7,26 @@
  **/
 
 var DATAPATH = 'data/';
-
 var RAWDATA;
-
 var TEAM_NAMES = [];
 var TEAMS = [];
-
 var GAMES = [];
+
+var NZ = [
+    'Central Pulse',
+    'Northern Mystics',
+    'Canterbury Tactix',
+    'Waikato Bay of Plenty Magic',
+    'Southern Steel'
+]
+
+var AUS = [
+    'Melbourne Vixens',
+    'Queensland Firebirds',
+    'Adelaide Thunderbirds',
+    'New South Wales Swifts',
+    'West Coast Fever'
+]
 
 $(function() {
 
@@ -119,6 +132,14 @@ function buildTeams() {
         var points = 0;
 
         // TODO points
+
+        if($.inArray(team, NZ) != -1) {
+            country = 'NZ';
+        } else if($.inArray(team, AUS) != -1) {
+            country = 'AUS';
+        } else {
+            console.log(team+" is not currently in the ANZ Championship.");
+        }
 
         // for each game
         GAMES.forEach(function(game) {
