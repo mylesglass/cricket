@@ -1,4 +1,5 @@
 #vis {
+	min-height: 80vh;
 }
 
 #filter {
@@ -8,5 +9,3 @@
 	stroke-width: 1px;
 	stroke: #444;
 }
-
-

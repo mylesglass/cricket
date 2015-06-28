@@ -10,7 +10,7 @@ $(function() {
 
 	// Create Drawing Area for d3
 	width = $('#vis').width();
-	height = 600;
+	height = $('#vis').height();
 	margin = width * 0.05;
 
 	svg = d3.select('#vis').append('svg')
@@ -24,9 +24,9 @@ $(function() {
 });
 
 
-/* 
+/*
 Team View
-	This right here is the team view mode. 
+	This right here is the team view mode.
 	It shows a teams progress thorughout a season or seasons
 	Mainly it displays wins and losses.
 */
@@ -90,17 +90,17 @@ function TeamViewUpdate(team, opponent) {
     var x = 0;
 	var spacing = (width - (margin * 2)) / listOfAllGames.length; // x axis lenght divided by number of games
 	var count = 0;
-	var range = 25;
+	var dmain = 33;
 	var yRange = d3.scale.linear()
 		.range([0,($('svg').height() / 2) - margin] )
-		.domain([0, range]);
+		.domain([0, dmain]);
 
     	listOfAllGames.forEach(function(game) {
     	count++;
     	x = margin + (count * spacing);
     	var goalDiff = Math.abs(game.homescore - game.awayscore);
     	if(team === game.winner) {
-			y = (height / 2) - yRange(goalDiff);				
+			y = (height / 2) - yRange(goalDiff);
 		} else if (game.winner === 'draw') {
 			y = (height / 2);
 		} else {
@@ -129,8 +129,8 @@ function TeamViewUpdate(team, opponent) {
 	            			.duration(3000)
     	        			.attrTween("stroke-dasharray", function() {
         				        var len = this.getTotalLength();
-                				return function(t) { 
-                					return (d3.interpolateString("0," + len, len + ",0"))(t) 
+                				return function(t) {
+                					return (d3.interpolateString("0," + len, len + ",0"))(t)
                 				};
                 			});
 
@@ -139,7 +139,7 @@ function TeamViewUpdate(team, opponent) {
 	/**==============================================================================================**/
 	var spacing = (width - (margin * 2)) / listOfAllGames.length; // x axis lenght divided by number of games
 	var count = 0;
-	var range = 25;
+	var range = 33;
 	var yRange = d3.scale.linear()
 		.range([0,($('svg').height() / 2) - margin] )
 		.domain([0, range]);
@@ -147,11 +147,11 @@ function TeamViewUpdate(team, opponent) {
 	circles.enter()
 		.append("circle")
 		.attr("class", "firstTeam")
-		.attr("cx", function (d) { 
+		.attr("cx", function (d) {
 			count++;
 			return margin + (count * spacing);
 		})
-		.attr("cy", function (d) { 
+		.attr("cy", function (d) {
 
 			var goalDiff = Math.abs(d.homescore - d.awayscore);
 
@@ -160,18 +160,18 @@ function TeamViewUpdate(team, opponent) {
 
 				return (height / 2) - yRange(goalDiff);
 
-				
+
 			} else if (d.winner === 'draw') {
 				return (height / 2);
 			} else {
 				return (height / 2) + yRange(goalDiff);
 			}
-			
+
 		})
 		.attr('r', 5)
 		.style("fill", "red")
 		.on("mouseover", function(d, i) {
-						
+
 
 			return tooltip.style("visibility", "visible")
 						  .style("top", (d3.mouse(this)[1])+"px")
@@ -234,7 +234,7 @@ function getOpponent(opponent) {
     var x = 0;
 	var spacing = (width - (margin * 2)) / listOfAllGames.length; // x axis lenght divided by number of games
 	var count = 0;
-	var range = 25;
+	var range = 33;
 	var yRange = d3.scale.linear()
 		.range([0,($('svg').height() / 2) - margin] )
 		.domain([0, range]);
@@ -244,7 +244,7 @@ function getOpponent(opponent) {
     	x = margin + (count * spacing);
     	var goalDiff = Math.abs(game.homescore - game.awayscore);
     	if(opponent === game.winner) {
-			y = (height / 2) - yRange(goalDiff);				
+			y = (height / 2) - yRange(goalDiff);
 		} else if (game.winner === 'draw') {
 			y = (height / 2);
 		} else {
@@ -273,8 +273,8 @@ function getOpponent(opponent) {
 	            			.duration(3000)
     	        			.attrTween("stroke-dasharray", function() {
         				        var len = this.getTotalLength();
-                				return function(t) { 
-                					return (d3.interpolateString("0," + len, len + ",0"))(t) 
+                				return function(t) {
+                					return (d3.interpolateString("0," + len, len + ",0"))(t)
                 				};
                 			});
 
@@ -283,7 +283,7 @@ function getOpponent(opponent) {
 	/**==============================================================================================**/
 	var spacing2 = (width - (margin * 2)) / listOfAllGames.length; // x axis lenght divided by number of games
 	var count2 = 0;
-	var range2 = 25;
+	var range2 = 33;
 	var yRange2 = d3.scale.linear()
 		.range([0,($('svg').height() / 2) - margin] )
 		.domain([0, range2]);
@@ -291,11 +291,11 @@ function getOpponent(opponent) {
 	circles2.enter()
 		.append("circle")
 		.attr("class", "secondTeam")
-		.attr("cx", function (d) { 
+		.attr("cx", function (d) {
 			count2++;
 			return margin + (count2 * spacing2);
 		})
-		.attr("cy", function (d) { 
+		.attr("cy", function (d) {
 
 			var goalDiff = Math.abs(d.homescore - d.awayscore);
 
@@ -304,18 +304,18 @@ function getOpponent(opponent) {
 
 				return (height / 2) - yRange2(goalDiff);
 
-				
+
 			} else if (d.winner === 'draw') {
 				return (height / 2);
 			} else {
 				return (height / 2) + yRange2(goalDiff);
 			}
-			
+
 		})
 		.attr('r', 5)
 		.style("fill", "yellow")
 		.on("mouseover", function(d, i) {
-						
+
 
 			return tooltip.style("visibility", "visible")
 						  .style("top", (d3.mouse(this)[1])+"px")
