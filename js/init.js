@@ -12,6 +12,7 @@ var TEAM_NAMES = [];
 var TEAMS = [];
 var GAMES = [];
 var SEASONS = []; //array of seasons that are selected
+var CURRENT_TEAM;
 
 var listOfAllGames = []; //an array that holds all the games (in GAMES) for a given team
 
@@ -36,41 +37,12 @@ $(function() {
     console.log('-Netball Visualisation--');
     console.log('Ewan Moshi & Myles Glass');
     console.log('------------------------');
-/*
-   var year = '2008';
 
-    if(year !== null) {
-        var file = DATAPATH + year + '-Table1.csv';
-
-        parseDataFile(file, year);
-
-        year = '2009';
-        file = DATAPATH + year + '-Table1.csv';
-        parseDataFile(file, year);
-
-        year = '2010';
-        file = DATAPATH + year + '-Table1.csv';
-        parseDataFile(file, year);
-
-        year = '2011';
-        file = DATAPATH + year + '-Table1.csv';
-        parseDataFile(file, year);
-
-        year = '2012';
-        file = DATAPATH + year + '-Table1.csv';
-        parseDataFile(file, year);
-
-        year = '2013';
-        file = DATAPATH + year + '-Table1.csv';
-        parseDataFile(file, year);
-
-        buildTeams();
-
-      
-        
-
-    }*/
 });
+
+function update() {
+    buildTeams();
+}
 
 /**
  * Data Parser
@@ -162,6 +134,7 @@ function buildTeams() {
         var losses = 0;
         var draws = 0;
         var points = 0;
+        var scoreRange = 0;
 
         // TODO points
 
@@ -190,6 +163,11 @@ function buildTeams() {
                         game.awayteam === team && game.awayscore < game.homescore){
                 losses++;
             }
+
+            // calculate maximum scoring differnce
+            if(Math.abs(game.homescore - game.awayscore) > scoreRange) {
+                scoreRange = Math.abs(game.homescore - game.awayscore);
+            }
         });
 
         if(team === 'West Coast Fever' || team === 'Central Pulse') {
@@ -204,7 +182,8 @@ function buildTeams() {
             wins : wins,
             losses : losses,
             draws : draws,
-            points : points
+            points : points,
+            scoreRange : scoreRange
         };
 
         // add to team list.

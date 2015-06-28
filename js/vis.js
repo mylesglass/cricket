@@ -61,8 +61,9 @@ function TeamView() {
 
 
 	parseDataFile('data/2008-Table1.csv', '2008');
+	update();
 	TeamViewUpdate(prompt('Team', 'Northern Mystics'));
-
+	
 	
 
 }
@@ -79,7 +80,10 @@ function TeamViewUpdate(team) {
 	// 
 	var spacing = (width - (margin * 2)) / listOfAllGames.length; // x axis lenght divided by number of games
 	var count = 0;
-	var scale = 10;
+	var range = 25;
+	var yRange = d3.scale.linear()
+		.range([0,$('svg').height() / 2])
+		.domain([0, range]);
 
 	circles.enter()
 		.append("circle")
@@ -94,13 +98,13 @@ function TeamViewUpdate(team) {
 			if(team === d.winner) {
 				console.log('winner!');
 
-				return (height / 2) - (goalDiff * scale);
+				return (height / 2) - yRange(goalDiff);
 
 				
 			} else if (d.winner === 'draw') {
 				//nothing
 			} else {
-				return (height / 2) + (goalDiff * scale);
+				return (height / 2) + yRange(goalDiff);
 			}
 			
 		})
