@@ -54,6 +54,11 @@ function parseDataFile(file, year) {
 
         RAWDATA.forEach(function(d) {
 
+            // Byes
+            if(d['Date'].substr(0,4) === 'BYES') {
+                // do nothing
+            } else {
+
             // Check if Team is already in list, if not, add it
             if($.inArray((d['Home Team']), TEAM_NAMES) == -1) {
                 TEAM_NAMES.push(d['Home Team']);
@@ -87,9 +92,9 @@ function parseDataFile(file, year) {
                 venue : d['Venue']
             };
 
-            GAMES.push(game); // add to array of games
+                GAMES.push(game); // add to array of games
 
-
+            }
         });
 
         console.log(TEAM_NAMES);
