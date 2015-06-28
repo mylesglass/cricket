@@ -79,7 +79,7 @@ function TeamViewUpdate(team) {
 	var count = 0;
 	var range = 25;
 	var yRange = d3.scale.linear()
-		.range([0,$('svg').height() / 2])
+		.range([0,($('svg').height() / 2) - margin] )
 		.domain([0, range]);
 
 	circles.enter()

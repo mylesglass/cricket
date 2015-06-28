@@ -80,6 +80,7 @@ function parseDataFile(file, year) {
 
             // calc scores
             var score = d['Score'];
+            score = score.replace(/\s+/g, '');
             var hscore, ascore;
             // if draw, fuck it
             if(score.substr(0,4) === 'draw') {
