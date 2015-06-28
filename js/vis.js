@@ -43,7 +43,7 @@ function TeamView() {
 	svg.append('text') // label
 		.attr('x', width / 2)
 		.attr('y', height - margin)
-		.text('games');
+		.text('Games');
 
 	// y axis line
 	svg.append('line')
@@ -52,14 +52,22 @@ function TeamView() {
 		.attr('x2', margin)
 		.attr('y2', height - margin)
 		.attr('class', 'graph-line');
-	svg.append('text') //label
-		.attr('x', margin)
+
+		svg.append('text') //label
+		.attr('x', margin + 80)
 		.attr('y', height / 2)
 		.attr('transform', function() {
 			return 'rotate(-90,' + (margin) + ',' + (height/2 + 5) + ')';
 		})
-		.text('win/loss');
+		.text('Win');
 
+		svg.append('text') //label
+		.attr('x', margin - 80)
+		.attr('y', height / 2)
+		.attr('transform', function() {
+			return 'rotate(-90,' + (margin) + ',' + (height/2 + 5) + ')';
+		})
+		.text('Loss');
 }
 
 function TeamViewUpdate(team, opponent) {
@@ -116,7 +124,15 @@ function TeamViewUpdate(team, opponent) {
                        .attr("d", lineFunction(lineData))
                        .attr("stroke", "blue")
                        .attr("stroke-width", 2)
-                       .attr("fill", "none");
+                       .attr("fill", "none")
+                       .transition()
+	            			.duration(3000)
+    	        			.attrTween("stroke-dasharray", function() {
+        				        var len = this.getTotalLength();
+                				return function(t) { 
+                					return (d3.interpolateString("0," + len, len + ",0"))(t) 
+                				};
+                			});
 
 
 	/**======================================DRAW THE CIRCLES========================================**/
@@ -130,6 +146,7 @@ function TeamViewUpdate(team, opponent) {
 
 	circles.enter()
 		.append("circle")
+		.attr("class", "firstTeam")
 		.attr("cx", function (d) { 
 			count++;
 			return margin + (count * spacing);
@@ -206,7 +223,7 @@ function getOpponent(opponent) {
 
 	getGamesForTeam(opponent);
 
-	var circles2 = svg.selectAll('circle').data(listOfAllGames, function(d) {
+	var circles2 = svg.selectAll('.secondTeam').data(listOfAllGames, function(d) {
 		return d.date;
 	});
 
@@ -249,25 +266,34 @@ function getOpponent(opponent) {
 
     var lineGraph = svg.append("path")
                        .attr("d", lineFunction(lineData))
-                       .attr("stroke", "blue")
+                       .attr("stroke", "green")
                        .attr("stroke-width", 2)
-                       .attr("fill", "none");
+                       .attr("fill", "none")
+                       .transition()
+	            			.duration(3000)
+    	        			.attrTween("stroke-dasharray", function() {
+        				        var len = this.getTotalLength();
+                				return function(t) { 
+                					return (d3.interpolateString("0," + len, len + ",0"))(t) 
+                				};
+                			});
 
 
 	/**======================================DRAW THE CIRCLES========================================**/
 	/**==============================================================================================**/
-	var spacing = (width - (margin * 2)) / listOfAllGames.length; // x axis lenght divided by number of games
-	var count = 0;
-	var range = 25;
+	var spacing2 = (width - (margin * 2)) / listOfAllGames.length; // x axis lenght divided by number of games
+	var count2 = 0;
+	var range2 = 25;
 	var yRange2 = d3.scale.linear()
 		.range([0,($('svg').height() / 2) - margin] )
-		.domain([0, range]);
+		.domain([0, range2]);
 
 	circles2.enter()
 		.append("circle")
+		.attr("class", "secondTeam")
 		.attr("cx", function (d) { 
-			count++;
-			return margin + (count * spacing);
+			count2++;
+			return margin + (count2 * spacing2);
 		})
 		.attr("cy", function (d) { 
 
@@ -287,7 +313,7 @@ function getOpponent(opponent) {
 			
 		})
 		.attr('r', 5)
-		.style("fill", "red")
+		.style("fill", "yellow")
 		.on("mouseover", function(d, i) {
 						
 
@@ -311,4 +337,31 @@ function getOpponent(opponent) {
 						.style("position", "absolute")
 						.style("z-index", "10")
 						.style("visibility", "hidden");
+
+						d3.selectAll(".firstTeam").style("stroke", "black") //set the line colour of all circles in first team
+						d3.selectAll(".secondTeam").style("stroke", "black") //set the line colour of all circles in second team
+
+
+	var keyTip1 = d3.select("body")
+						.append("div")
+						.style("background-color", "lightblue")
+						.style("border-radius", "8px")
+						.style("padding", "3px")
+						.style("position", "absolute")
+						.style("z-index", "10")
+						.style("top", (height + 80)+"px")
+						.style("left", (margin - 40)+"px")
+						.html('<font size="2" color="blue"><strong>Blue Line</font></strong> = <strong>'+selectedTeam);
+
+	var keyTip2 = d3.select("body")
+						.append("div")
+						.style("background-color", "lightgreen")
+						.style("border-radius", "8px")
+						.style("padding", "3px")
+						.style("position", "absolute")
+						.style("z-index", "10")
+						.style("top", (height + 110)+"px")
+						.style("left", (margin - 40)+"px")
+						.html('<font size="2" color="green"><strong>Green Line</font></strong> = <strong>'+selectedOpponent);
+
 }
