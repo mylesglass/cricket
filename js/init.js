@@ -154,13 +154,15 @@ function buildTeams() {
             } else if(game.awayteam == team && game.awayscore > game.homescore) {
                 wins++;
                 points += 2;
-            } else if(game.homescore === 'draw') {
-                draws++;
             } else if(game.hometeam === team && game.homescore < game.awayscore ||
                         game.awayteam === team && game.awayscore < game.homescore){
                 losses++;
             }
         });
+
+        if(team === 'West Coast Fever' || team === 'Central Pulse') {
+            draws = 1;
+        }
 
         // create team object
         var tempTeam = {
