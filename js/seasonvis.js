@@ -3,7 +3,7 @@
 	Ewan Moshi & Myles Glass
 **/
 
-var svg, width, height, margin;
+var svg, width, height, margin, tip;
 
 $(function() {
 
@@ -18,9 +18,21 @@ $(function() {
 
 	console.log("SVG Created");
 
+	tip = d3.tip().attr('class', 'd3-tip').html(function(d) { return d; });
+
 	TeamView();
 
 });
+
+
+/**
+	Season View
+		Displays teams progression throughout a season.
+		Pretty dope tbh.
+**/
+function SeasonView () {
+	
+}
 
 
 /* 
@@ -65,9 +77,10 @@ function TeamViewUpdate(team) {
 
 	update();
 
-	d3.selectAll("circle").remove();
+	
 
 	getGamesForTeam(team);
+
 	// Bind nodes to date
 	var circles = svg.selectAll('circle').data(listOfAllGames, function(d) {
 		return d.date;
@@ -105,17 +118,11 @@ function TeamViewUpdate(team) {
 			
 		})
 		.attr('r', 5)
-		.style("fill", "red");
-	/*circles.transition().duration(1000)
-		.attr("cx", function (d) { return d.value1; })
-		.attr("cy", function (d) { return d.value2; })
-		.attr("r", function (d) { return d.value3; });
-
-	circles.exit ()
-		.transition().duration(1000)
-		.attr("r", 0)
-		.remove ();
+		.style("fill", "#003399")
+		.on("mouseover", function(d) {
+			var selectedNode = d3.select(this)
+				.style({opactiy: '0.5'});
+		});
 
 
-	setTimeout (update, 2000);*/
 }
