@@ -87,11 +87,13 @@ $('.btn-season').on('click', function (e) {
 
 $('.btn-update-team').click(function(event) {
     if(selectedTeam === undefined) {
-      alert('Please select a team');
-    } else if(SEASONS.length === 0) {
-      alert('Please select a season');
-    } else {
-      TeamViewUpdate(selectedTeam, selectedOpponent);
+      alert('Please Select Team 1');
+    } 
+    else if(SEASONS.length === 0) {
+      alert('Please Select a Season');
+    }
+    else {
+       TeamViewUpdate(selectedTeam, selectedOpponent);
     }
 });
 

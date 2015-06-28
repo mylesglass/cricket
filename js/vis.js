@@ -75,7 +75,7 @@ function TeamViewUpdate(team, opponent) {
 	update();
     listOfAllGames = [];
     listOfAllGames2 = [];
-    
+
 	d3.selectAll("circle").remove();
 	d3.selectAll("path").remove();
 
@@ -355,7 +355,10 @@ function getOpponent(opponent) {
 						.style("left", (margin - 40)+"px")
 						.html('<font size="2" color="blue"><strong>Blue Line</font></strong> = <strong>'+selectedTeam);
 
-	var keyTip2 = d3.select("body")
+	if(opponent === undefined) {
+	}
+	else {
+		var keyTip2 = d3.select("body")
 						.append("div")
 						.style("background-color", "lightgreen")
 						.style("border-radius", "8px")
@@ -366,4 +369,5 @@ function getOpponent(opponent) {
 						.style("left", (margin - 40)+"px")
 						.html('<font size="2" color="green"><strong>Green Line</font></strong> = <strong>'+selectedOpponent);
 
+	}
 }
