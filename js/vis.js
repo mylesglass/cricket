@@ -62,10 +62,6 @@ function TeamView() {
 
 	parseDataFile('data/2008-Table1.csv', '2008');
 	update();
-	TeamViewUpdate(prompt('Team', 'Northern Mystics'));
-	
-	
-
 }
 
 function TeamViewUpdate(team) {
