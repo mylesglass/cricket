@@ -4,6 +4,7 @@
 **/
 
 var svg, width, height, margin;
+var globalCounter;
 
 $(function() {
 
@@ -66,6 +67,7 @@ function TeamViewUpdate(team) {
 	update();
 
 	d3.selectAll("circle").remove();
+	d3.selectAll("path").remove();
 
 	getGamesForTeam(team);
 	// Bind nodes to date
@@ -73,7 +75,52 @@ function TeamViewUpdate(team) {
 		return d.date;
 	});
 
-	// 
+	/**======================================DRAW THE PATH FOR EACH POINT============================**/
+	/**==============================================================================================**/
+	var lineData = [];
+    var x = 0;
+    var x = 0;
+	var spacing = (width - (margin * 2)) / listOfAllGames.length; // x axis lenght divided by number of games
+	var count = 0;
+	var range = 25;
+	var yRange = d3.scale.linear()
+		.range([0,($('svg').height() / 2) - margin] )
+		.domain([0, range]);
+
+    	listOfAllGames.forEach(function(game) {
+    	count++;
+    	x = margin + (count * spacing);
+    	var goalDiff = Math.abs(game.homescore - game.awayscore);
+    	if(team === game.winner) {
+			y = (height / 2) - yRange(goalDiff);				
+		} else if (game.winner === 'draw') {
+			y = (height / 2);
+		} else {
+			y = (height / 2) + yRange(goalDiff);
+		}
+		        // create team object
+        var point = {
+            x : x,
+            y : y,
+        };
+
+        lineData.push(point);
+   	});
+
+	var lineFunction = d3.svg.line()
+                    .x(function(d) { return d.x; })
+                    .y(function(d) { return d.y; })
+                    .interpolate("linear");
+
+    var lineGraph = svg.append("path")
+                       .attr("d", lineFunction(lineData))
+                       .attr("stroke", "blue")
+                       .attr("stroke-width", 2)
+                       .attr("fill", "none");
+
+
+	/**======================================DRAW THE CIRCLES========================================**/
+	/**==============================================================================================**/
 	var spacing = (width - (margin * 2)) / listOfAllGames.length; // x axis lenght divided by number of games
 	var count = 0;
 	var range = 25;
@@ -105,7 +152,30 @@ function TeamViewUpdate(team) {
 			
 		})
 		.attr('r', 5)
-		.style("fill", "red");
+		.style("fill", "red")
+		.on("mouseover", function(d, i) {
+						
+
+			return tooltip.style("visibility", "visible")
+						  .style("top", (d3.mouse(this)[1])+"px")
+						  .style("left",(d3.mouse(this)[0])+"px")
+						  .html("HomeTeam: "+listOfAllGames[i].hometeam +"<br/>"+
+						  		"AwayTeam: "+listOfAllGames[i].awayteam +"<br/>"+
+						  		"Score: "+listOfAllGames[i].homescore+"-"+listOfAllGames[i].awayscore);
+
+		})
+		.on("mouseout", function(d, i) {
+			return tooltip.style("visibility", "hidden");
+		});
+
+
+		var tooltip = d3.select("body")
+						.append("div")
+						.style("background-color", "lightblue")
+						.style("position", "absolute")
+						.style("z-index", "10")
+						.style("visibility", "hidden");
+
 	/*circles.transition().duration(1000)
 		.attr("cx", function (d) { return d.value1; })
 		.attr("cy", function (d) { return d.value2; })
