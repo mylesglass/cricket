@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+
+<!--
+	This is some funky fresh work by
+	  Ewan Moshi &
+	  Myles Glass
+	  2015
+	Created for
+	  Victoria University of Wellington
+	  Software Engineering
+	  303 User Interface
+	  Assignment 4
+	If you think this is amazing, hire us
+
+	p.s. if you're using internet explorer, you might have a bad time
+-->
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Cricket</title>
+
+        <!-- StyleSheets -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
+
+    </head>
+
+    <body>
+	<!-- Main Container -->
+        <div class="container-fluid">
+
+	    <div class="row">
+		<div id="vis" class="col-md-8">
+		    <h1>Season View</h1>
+		</div>
+
+		<div id="filter" class="col-md-4">
+		    <h1><strong>Filter</strong></h1>
+
+
+		    <!-- Teams Select -->
+
+		    <h2>Team</h2>
+
+			<div class="btn-group">
+			<button type="button" class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Select Teams  <span class="caret"></span></button>
+			<ul class="dropdown-menu">
+			<li><a href="#"  data-value="option1" tabIndex="-1"><input type="checkbox"/>&nbsp;Central Pulse</a></li>
+			<li><a href="#"  data-value="option2" tabIndex="-1"><input type="checkbox"/>&nbsp;Melbourne Vixens</a></li>
+			<li><a href="#"  data-value="option3" tabIndex="-1"><input type="checkbox"/>&nbsp;Queensland Firebirds</a></li>
+			<li><a href="#"  data-value="option4" tabIndex="-1"><input type="checkbox"/>&nbsp;West Coast Fever</a></li>
+			<li><a href="#"  data-value="option5" tabIndex="-1"><input type="checkbox"/>&nbsp;Canterbury Tactix</a></li>
+			<li><a href="#"  data-value="option6" tabIndex="-1"><input type="checkbox"/>&nbsp;Northern Mystics</a></li>
+		    <li><a href="#"  data-value="option6" tabIndex="-1"><input type="checkbox"/>&nbsp;Waikato Bay of Plenty Magic</a></li>
+			<li><a href="#"  data-value="option6" tabIndex="-1"><input type="checkbox"/>&nbsp;New South Wales Swifts</a></li>
+			<li><a href="#"  data-value="option6" tabIndex="-1"><input type="checkbox"/>&nbsp;Southern Steel</a></li>
+			<li><a href="#"  data-value="option6" tabIndex="-1"><input type="checkbox"/>&nbsp;Adelaide Thunderbirds</a></li>
+
+			</ul>
+			</div>
+
+		    <!-- Season Select -->
+
+		    <h2>Season</h2>
+
+		    <div class="btn-group">
+		      <button type="button" class="btn btn-primary btn-season" data-toggle="button">2008</button>
+		      <button type="button" class="btn btn-primary btn-season" data-toggle="button">2009</button>
+		      <button type="button" class="btn btn-primary btn-season" data-toggle="button">2010</button>
+		      <button type="button" class="btn btn-primary btn-season" data-toggle="button">2011</button>
+		      <button type="button" class="btn btn-primary btn-season" data-toggle="button">2012</button>
+		      <button type="button" class="btn btn-primary btn-season" data-toggle="button">2013</button>
+		    </div>
+
+		 </div>
+	    </div>
+
+        </div>
+
+        <!-- JavaScript Files -->
+        <script src="js/libs/jquery.js"></script>
+        <script src="js/libs/jquery-csv.js"></script>
+        <script src="js/libs/bootstrap.js"></script>
+        <script src="js/libs/d3.js"></script>
+
+        <script src="js/init.js"></script>
+
+        <script src="js/SeasonView.js"></script>
+
+		<script src="js/FilterHandling.js"></script> 
+
+        <script src="js/vis.js"></script>
+
+    </body>
+</html>

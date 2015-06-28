@@ -68,7 +68,6 @@ function TeamViewUpdate(team) {
 	d3.selectAll("circle").remove();
 
 	getGamesForTeam(team);
-
 	// Bind nodes to date
 	var circles = svg.selectAll('circle').data(listOfAllGames, function(d) {
 		return d.date;
@@ -107,7 +106,6 @@ function TeamViewUpdate(team) {
 		})
 		.attr('r', 5)
 		.style("fill", "red");
-
 	/*circles.transition().duration(1000)
 		.attr("cx", function (d) { return d.value1; })
 		.attr("cy", function (d) { return d.value2; })

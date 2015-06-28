@@ -77,13 +77,20 @@ $('.btn-season').on('click', function (e) {
         }
     }
 
+   updateSeasons();
+
+
+ });
+
+
+function updateSeasons() {
     /*Set the array of GAMES to be empty, then fill it with the games of all the seasons currently selected*/
     GAMES = [];
     SEASONS.forEach(function(season) { //for each season
         var file = DATAPATH + season + '-Table1.csv';
-         parseDataFile(file, season); //parse current season in SEASONS
+        parseDataFile(file, season); //parse current season in SEASONS
     });
- });
+}
 
  /*When a drop down menu is selected, store the selected value and update the drop down menu to display selected item
   ========EVENT HANDLER FOR TEAM SELECT==============**/
@@ -91,7 +98,7 @@ $(".teamselectdropdown li").click(function(event) {
   selectedTeam = $(this).text();
   selectedText = $(this).text(); //store the selected text in a variable
   $(this).parents('.btn-group').find('.dropdown-toggle').html(selectedText+' <span class="caret"></span>'); //update the drop down menu's text
-    TeamViewUpdate(selectedTeam);
+  TeamViewUpdate(selectedTeam);
 });
 
  /*========EVENT HANDLER FOR SEASON SELECT==============**/
