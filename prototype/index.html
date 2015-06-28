@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <!--
 This is some funky fresh work by
 Ewan Moshi &
@@ -11,135 +10,107 @@ Software Engineering
 303 User Interface
 Assignment 4
 If you think this is amazing, hire us
-
 p.s. if you're using internet explorer, you might have a bad time
 -->
-
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>Cricket</title>
-
-  <!-- StyleSheets -->
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/style.css">
-
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cricket</title>
+<!-- StyleSheets -->
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <script src="js/libs/d3.js"></script>
 <body>
-  <!-- Main Container -->
-  <div class="container-fluid">
-
-    <div class="row">
-      <div id="vis" class="col-md-8">
-        <h1>Team View</h1>
-      </div>
-
-      <div id = "svgContainer" class = "col-md-8">
-      <script>
-      var w = 650;
-      var h = 400;
-      var padding = 20;
-      var border=1;
-      var bordercolor='black';
-
-      var svg = d3.select("body")
-      .append("svg")
-      .attr("width", w)
-      .attr("height", h)
-      .attr("border",border);
-
-      var borderPath = svg.append("rect").attr("x", 0)
-      .attr("y", 0)
-      .attr("height", h)
-      .attr("width", w)
-      .style("stroke", bordercolor)
-      .style("fill", "none")
-      .style("stroke-width", border);
-
-      </script>
-    </div>
-
-
-    <div id="filter" class="col-md-4">
-      <h1><strong>Filter</strong></h1>
-
-      <!-- Team Select -->
-
-      <h2>Team</h2>
-
-      <div class="btn-group">
-        <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-          Select Team <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" role="menu">
-          <li><a href="#">Team 1</a></li>
-          <li><a href="#">Team 2</a></li>
-          <li><a href="#">Team 3</a></li>
-        </ul>
-      </div>
-
-      <!-- Location Select -->
-
-      <h2>Team</h2>
-
-      <div class="btn-group">
-        <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-          Select Location <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" role="menu" id="menuLocation">
-          <li><a href="#">Wellydeep</a></li>
-          <li><a href="#">Auckland</a></li>
-          <li><a href="#">CHCH</a></li>
-        </ul>
-      </div>
-
-      <!-- Season Select -->
-
-      <h2>Season</h2>
-
-      <div class="btn-group">
-        <button type="button" class="btn btn-primary" data-toggle="button" id="2008">2008</button>
-        <button type="button" class="btn btn-primary" data-toggle="button">2009</button>
-        <button type="button" class="btn btn-primary" data-toggle="button">2010</button>
-        <button type="button" class="btn btn-primary" data-toggle="button">2011</button>
-        <button type="button" class="btn btn-primary" data-toggle="button">2012</button>
-        <button type="button" class="btn btn-primary" data-toggle="button">2013</button>
-      </div>
-
-      <!-- Opponent Select -->
-
-      <h2>Opponent</h2>
-
-      <div class="btn-group">
-        <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-          Select Opponent <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" role="menu">
-          <li><a href="#">Team 1</a></li>
-          <li><a href="#">Team 2</a></li>
-          <li><a href="#">Team 3</a></li>
-        </ul>
-      </div>
-
-      <!-- Load File -->
-      <input type="file" name="file" id="file">
-    </div>
-  </div>
-
+<!-- Main Container -->
+<div class="container-fluid">
+<div class="row">
+<div id="vis" class="col-md-8">
+<h1>Team View</h1>
 </div>
 
+<script>
+var w = 650;
+var h = 400;
+var padding = 20;
+var border=1;
+var bordercolor='black';
+var svg = d3.select("#vis")
+.append("svg")
+.attr("width", w)
+.attr("height", h)
+.attr("border",border);
+var borderPath = svg.append("rect").attr("x", 0)
+.attr("y", 0)
+.attr("height", h)
+.attr("width", w)
+.style("stroke", bordercolor)
+.style("fill", "none")
+.style("stroke-width", border);
+</script>
 
 
-
+<div id="filter" class="col-md-4">
+<h1><strong>Filter</strong></h1>
+<!-- Team Select -->
+<h2>Team</h2>
+<div class="btn-group">
+<button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+Select Team <span class="caret"></span>
+</button>
+<ul class="dropdown-menu teamselectdropdown" role="menu">
+<li><a href="#">Team 1</a></li>
+<li><a href="#">Team 2</a></li>
+<li><a href="#">Team 3</a></li>
+</ul>
+</div>
+<!-- Location Select -->
+<h2>Team</h2>
+<div class="btn-group">
+<button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+Select Location <span class="caret"></span>
+</button>
+<ul class="dropdown-menu" role="menu">
+<li><a href="#">Wellydeep</a></li>
+<li><a href="#">Auckland</a></li>
+<li><a href="#">CHCH</a></li>
+</ul>
+</div>
+<!-- Season Select -->
+<h2>Season</h2>
+<div class="btn-group">
+<button type="button" class="btn btn-primary btn-season" data-toggle="button">2008</button>
+<button type="button" class="btn btn-primary btn-season" data-toggle="button">2009</button>
+<button type="button" class="btn btn-primary btn-season" data-toggle="button">2010</button>
+<button type="button" class="btn btn-primary btn-season" data-toggle="button">2011</button>
+<button type="button" class="btn btn-primary btn-season" data-toggle="button">2012</button>
+<button type="button" class="btn btn-primary btn-season" data-toggle="button">2013</button>
+</div>
+<!-- Opponent Select -->
+<h2>Opponent</h2>
+<div class="btn-group">
+<button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+Select Opponent <span class="caret"></span>
+</button>
+<ul class="dropdown-menu" role="menu" >
+<li><a href="#">Team 1</a></li>
+<li><a href="#">Team 2</a></li>
+<li><a href="#">Team 3</a></li>
+</ul>
+</div>
+<!-- Load File -->
+<input type="file" name="file" id="file">
+</div>
+</div>
+</div>
 <!-- JavaScript Files -->
 <script src="js/libs/jquery.js"></script>
 <script src="js/libs/jquery-csv.js"></script>
 <script src="js/libs/bootstrap.js"></script>
 <script src="loading.js"></script>
+<script src="FilterHandling.js"></script>
 
 </body>
 </html>

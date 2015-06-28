@@ -1,72 +1,183 @@
-var selectedText;
-var teamData = {};
+    /**
+     * Initialisation for Netball Visualisation Application
+     * Say that 10 times fast
+     *
+     * Ewan Moshi & Myles Glass
+     * 2015
+     **/
 
-$('#2008').on('click', function (e) {
-  file = "2008-Table1.csv";
-  readData();
-});
+    var DATAPATH = 'data/';
+    var RAWDATA;
+    var TEAM_NAMES = [];
+    var TEAMS = [];
+    var GAMES = [];
+    var SEASONS = []; //array of seasons that are selected
 
-/*When a drop down menu is selected, store the selected value*/
-$(".dropdown-menu li").click(function(event){
-  selectedText = $(this).text();
-  $(this).parents('.btn-group').find('.dropdown-toggle').html(selectedText+' <span class="caret"></span>');
-});
+    var listOfAllGames = []; //an array that holds all the games (in GAMES) for a given team
 
-/*This doesn't work for our one but it's just an example from the bootstrap tutorials*/
-$(".dropdown").on("show.bs.dropdown", function(event){
-    var x = $(event.relatedTarget).text(); // Get the text of the element
-    alert(x);
-});
+    var NZ = [
+        'Central Pulse',
+        'Northern Mystics',
+        'Canterbury Tactix',
+        'Waikato Bay of Plenty Magic',
+        'Southern Steel'
+    ]
 
-function readData() {
+    var AUS = [
+        'Melbourne Vixens',
+        'Queensland Firebirds',
+        'Adelaide Thunderbirds',
+        'New South Wales Swifts',
+        'West Coast Fever'
+    ]
 
-  //Get the value of the each checked button
-  var checkedYearValue = '2008';
-  var checkedCountryValue = 'nz';
-  var checkedSeasonValue = 'regular';
+    $(function() {
 
-  //map to get the names of the data files
-  var yearToFilename = {
-    2008: "data/2008-Table1.csv",
-    2009: "data/2009-Table1.csv",
-    2010: "data/2010-Table1.csv",
-    2011: "data/2011-Table1.csv",
-    2012: "data/2012-Table1.csv",
-    2013: "data/2013-Table1.csv"
-  };
+        console.log('-Netball Visualisation--');
+        console.log('Ewan Moshi & Myles Glass');
+        console.log('------------------------');
+    });
 
-  //A list showing which team belong to which country
-  var teamToCountry = {
-    nz: ["Central Pulse", "Northern Mystics", "Waikato Bay of Plenty Magic", "Southern Steel", "Canterbury Tactix"],
-    aus: ["New South Wales Swifts", "Adelaide Thunderbirds", "Melbourne Vixens", "West Coast Fever", "Queensland Firebirds"],
-    both: ["Central Pulse", "Northern Mystics", "Waikato Bay of Plenty Magic", "Southern Steel", "Canterbury Tactix", "New South Wales Swifts", "Adelaide Thunderbirds", "Melbourne Vixens", "West Coast Fever", "Queensland Firebirds"]
-  };
 
-  //A list showing which round corresponds to regular, finals and both
-  var seasonToRound = {
-    bothSeasons: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17"],
-    regular: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"],
-    finals: ["15", "16", "17"]
-  }
+    /**
+     * Data Parser
+     * Takes any csv files within the ./data/ directory and constructs usable
+     * data structures from them.
+     *
+     *  requires at least one data file, in correct syntax to be present
+     *      file : string path to data file
+     *      year : year of file.
+     *  syntax: Round Date Time(optional) HomeTeam Score AwayTeam Venue
+     * */
+    function parseDataFile(file, year) {
+        console.log('Parsing file '+file);
 
-  //Get the filename given the year
-  var fileName = "data/2008-Table1.csv";
+        // using d3's built in csv parsing
+        d3.csv(file, function(data) {
 
-  d3.csv(fileName, function (data) {
-       //Gather all data for each team depending on which country is seleceted
-       teamToCountry[checkedCountryValue].forEach(function (element) {
-           var d = [];
-           data.forEach(function (row) {
-               //Add rows based on round number
-               if (row["Home Team"] === element || row["Away Team"] === element) {
-                   seasonToRound[checkedSeasonValue].forEach(function (round) {
-                       if (row["Round"] === round) {
-                           d.push(row);
-                       }
-                   });
-               }
-           });
-           teamData[element] = d;
-       });
-   });
-}
+            RAWDATA = data;
+
+            RAWDATA.forEach(function(d) {
+
+                // Byes
+                if(d['Date'].substr(0,4) === 'BYES') {
+                    // do nothing
+                } else {
+
+                // Check if Team is already in list, if not, add it
+                if($.inArray((d['Home Team']), TEAM_NAMES) == -1) {
+                    TEAM_NAMES.push(d['Home Team']);
+                }
+                if($.inArray((d['Away Team']), TEAM_NAMES) == -1) {
+                    TEAM_NAMES.push(d['Away Team']);
+                }
+
+                // calc scores
+                var score = d['Score'];
+                var hscore, ascore;
+                // if draw, fuck it
+                if(score.substr(0,4) === 'draw') {
+                    hscore = 'draw';
+                    ascore = 'draw';
+                } else {    // split string, and parse for int
+                    hscore = parseInt(score.substr(0,2));
+                    ascore = parseInt(score.substr(3,5));
+                }
+
+                // Create game objects for each
+                var game = {
+                    round : d['Round'],
+                    date : d['Date'],
+                    year : year,
+                    time : d['Time'],   // Note, time may be undefined
+                    hometeam : d['Home Team'],
+                    awayteam : d['Away Team'],
+                    homescore : hscore,    // I'm assuming no one scores over 100 lol
+                    awayscore : ascore,
+                    venue : d['Venue']
+                };
+
+                    GAMES.push(game); // add to array of games
+
+                }
+            });
+
+            console.log(TEAM_NAMES);
+            console.log(GAMES[0]);
+            buildTeams();
+
+        });
+
+        console.log("Data File Parsed.")
+    }
+
+    function buildTeams() {
+
+        // for each unique team we found on file
+        TEAM_NAMES.forEach(function(team) {
+
+            // create a bunch of variables
+            var venue, country;
+            var wins = 0;
+            var losses = 0;
+            var draws = 0;
+            var points = 0;
+
+            // TODO points
+
+            if($.inArray(team, NZ) != -1) {
+                country = 'NZ';
+            } else if($.inArray(team, AUS) != -1) {
+                country = 'AUS';
+            } else {
+                console.log(team+" is not currently in the ANZ Championship.");
+            }
+
+            // for each game
+            GAMES.forEach(function(game) {
+                // find home pitch if not already found
+                if(venue === undefined && team === game.hometeam) {
+                    venue = game.venue;
+                }
+                // add wins, losses, draws, and points
+                if (game.hometeam === team && game.homescore > game.awayscore) {
+                    wins++;
+                    points += 2;
+                } else if(game.awayteam == team && game.awayscore > game.homescore) {
+                    wins++;
+                    points += 2;
+                } else if(game.homescore === 'draw') {
+                    draws++;
+                } else if(game.hometeam === team && game.homescore < game.awayscore ||
+                            game.awayteam === team && game.awayscore < game.homescore){
+                    losses++;
+                }
+            });
+
+            // create team object
+            var tempTeam = {
+                name : team,
+                venue : venue,
+                country : country,
+                wins : wins,
+                losses : losses,
+                draws : draws,
+                points : points
+            };
+
+            // add to team list.
+            TEAMS.push(tempTeam);
+        });
+    }
+
+
+
+    function getGamesForTeam(teamName) {
+        GAMES.forEach(function(game) {
+          //if the team we are looking for is involved in this game as home or away, add this game to team's list of games
+          if(game.hometeam === teamName || game.awayteam === teamName) { 
+            listOfAllGames.push(game); //push this game object/instance to array
+          }
+        });
+    }
+
