@@ -1,6 +1,7 @@
 var options = [];
+var selectedSeason, selectedText;
 
-$( '.dropdown-menu a' ).on( 'click', function( event ) {
+$( '.dropdown-menu-seasons a' ).on( 'click', function( event ) {
 
    var $target = $( event.currentTarget ),
        val = $target.attr( 'data-value' ),
@@ -19,4 +20,32 @@ $( '.dropdown-menu a' ).on( 'click', function( event ) {
       
    console.log( options );
    return false;
+});
+
+// Season Select
+$('.dropdown-season li').click(function(event) {
+    selectedSeason = $(this).text();
+    selectedText = $(this).text();
+    console.log(selectedText);
+
+    // Change toggle to name of selected season
+    $(this).parents('.btn-group').find('.dropdown-toggle').html(selectedText+' <span class="caret"></span>');
+});
+
+
+// Season View Update button
+$('.btn-update-season').click(function(event) {
+    if(options.length === 0) {
+        alert("Please Select a Team");
+    } else if (selectedText === null) {
+        alert("Please Select a Season");
+    } else {
+        console.log("Season chosen: " + selectedSeason);
+        parseDataFile(DATAPATH + selectedSeason + '-Table1.csv');
+        update();
+        options.forEach(function(team) {
+            drawTeamSeason(team);
+        });
+
+    }
 });

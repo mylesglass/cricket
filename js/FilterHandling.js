@@ -83,9 +83,9 @@ $('.btn-season').on('click', function (e) {
  });
 
 
-// Update button
+// Team View Update button
 
-$('.btn-update').click(function(event) {
+$('.btn-update-team').click(function(event) {
     if(selectedTeam === undefined) {
       alert('Please select a team');
     } else if(SEASONS.length === 0) {
@@ -127,4 +127,6 @@ $(".opponentselectdropdown li").click(function(event) {
   selectedText = $(this).text();
   $(this).parents('.btn-group').find('.dropdown-toggle').html(selectedText+' <span class="caret"></span>');
 });
+
+
 

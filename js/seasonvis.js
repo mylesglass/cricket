@@ -25,8 +25,6 @@ $(function() {
 
 
 	SeasonView();
-	UpdateSeasonView();
-	drawTeamSeason('Northern Mystics');
 
 });
 
@@ -70,12 +68,6 @@ function SeasonView () {
 		.attr('y', '6')	
 		.attr('dy', '.71em')
 		.style('text-anchor', 'end');
-}
-
-// Update data to make sure current filter is applied
-function UpdateSeasonView() {
-	update(); // update in init
-
 }
 
 function drawTeamSeason(team) {

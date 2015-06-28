@@ -39,27 +39,70 @@
 		</div>
 
 		<div id="filter" class="col-md-4">
-		    <h1><strong>Filter</strong></h1>
+		<h1><strong>Filter</strong></h1>
 
 
-		    <!-- Teams Select -->
+		<!-- Teams Select -->
 
-		    <h2>Team</h2>
+		<h2>Team</h2>
 
-			<div class="btn-group">
-		<button type="button" class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Select Teams  <span class="caret"></span></button>
-		<ul class="dropdown-menu">
-		<li><a href="#"  data-value="Central Pulse"><input type="checkbox"/>&nbsp;Central Pulse</a></li>
-		<li><a href="#"  data-value="Melbourne Vixens"><input type="checkbox"/>&nbsp;Melbourne Vixens</a></li>
-		<li><a href="#"  data-value="Queensland Firebirds<"><input type="checkbox"/>&nbsp;Queensland Firebirds</a></li>
-		<li><a href="#"  data-value="West Coast Fever"><input type="checkbox"/>&nbsp;West Coast Fever</a></li>
-		<li><a href="#"  data-value="Canterbury Tactix"><input type="checkbox"/>&nbsp;Canterbury Tactix</a></li>
-		<li><a href="#"  data-value="Northern Mystics"><input type="checkbox"/>&nbsp;Northern Mystics</a></li>
-	    <li><a href="#"  data-value="Waikato Bay of Plenty Magic"><input type="checkbox"/>&nbsp;Waikato Bay of Plenty Magic</a></li>
-		<li><a href="#"  data-value="New South Wales Swifts"><input type="checkbox"/>&nbsp;New South Wales Swifts</a></li>
-		<li><a href="#"  data-value="Southern Steel"><input type="checkbox"/>&nbsp;Southern Steel</a></li>
-		<li><a href="#"  data-value="Adelaide Thunderbirds"><input type="checkbox"/>&nbsp;Adelaide Thunderbirds</a></li>
-		</ul>
+		<div class="btn-group">
+			<button type="button" class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+				Select Teams  <span class="caret"></span>
+			</button>
+		
+			<ul class="dropdown-menu dropdown-menu-seasons">
+				<li>
+					<a href="#"  data-value="Central Pulse">
+						<input type="checkbox"/>&nbsp;Central Pulse
+					</a>
+				</li>
+				<li>
+					<a href="#"  data-value="Melbourne Vixens">
+						<input type="checkbox"/>&nbsp;Melbourne Vixens
+					</a>
+				</li>
+				<li>
+					<a href="#"  data-value="Queensland Firebirds<">
+						<input type="checkbox"/>&nbsp;Queensland Firebirds
+					</a>
+				</li>
+				<li>
+					<a href="#"  data-value="West Coast Fever">
+						<input type="checkbox"/>&nbsp;West Coast Fever
+					</a>
+				</li>
+				<li>
+					<a href="#"  data-value="Canterbury Tactix">
+						<input type="checkbox"/>&nbsp;Canterbury Tactix
+					</a>
+				</li>
+				<li>
+					<a href="#"  data-value="Northern Mystics">
+						<input type="checkbox"/>&nbsp;Northern Mystics
+					</a>
+				</li>
+	    		<li>
+	    			<a href="#"  data-value="Waikato Bay of Plenty Magic">
+	    				<input type="checkbox"/>&nbsp;Waikato Bay of Plenty Magic
+	    			</a>
+	    		</li>
+				<li>
+					<a href="#"  data-value="New South Wales Swifts">
+						<input type="checkbox"/>&nbsp;New South Wales Swifts
+					</a>
+				</li>
+				<li>
+					<a href="#"  data-value="Southern Steel">
+						<input type="checkbox"/>&nbsp;Southern Steel
+					</a>
+				</li>
+				<li>
+					<a href="#"  data-value="Adelaide Thunderbirds">
+						<input type="checkbox"/>&nbsp;Adelaide Thunderbirds
+					</a>
+				</li>
+			</ul>
 		</div>
 
 		    <!-- Season Select -->
@@ -67,13 +110,22 @@
 		    <h2>Season</h2>
 
 		    <div class="btn-group">
-		      <button type="button" class="btn btn-primary btn-season" data-toggle="button">2008</button>
-		      <button type="button" class="btn btn-primary btn-season" data-toggle="button">2009</button>
-		      <button type="button" class="btn btn-primary btn-season" data-toggle="button">2010</button>
-		      <button type="button" class="btn btn-primary btn-season" data-toggle="button">2011</button>
-		      <button type="button" class="btn btn-primary btn-season" data-toggle="button">2012</button>
-		      <button type="button" class="btn btn-primary btn-season" data-toggle="button">2013</button>
+			<button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+			    Select Season <span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu dropdown-season" role="menu">
+			      <li><a href="#">2008</a></li>
+			      <li><a href="#">2009</a></li>
+			      <li><a href="#">2010</a></li>
+			      <li><a href="#">2011</a></li>
+			      <li><a href="#">2012</a></li>
+			      <li><a href="#">2013</a></li>
+			</ul>
 		    </div>
+
+		    <button class="btn btn-default btn-lg btn-update-season" type="button">
+		    	Update <span class="glyphicon glyphicon-refresh"></span>
+		    </button>
 		 </div>
 	    </div>
 

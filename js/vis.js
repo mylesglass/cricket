@@ -10,7 +10,7 @@ $(function() {
 
 	// Create Drawing Area for d3
 	width = $('#vis').width();
-	height = $('body').height();
+	height = 600;
 	margin = width * 0.05;
 
 	svg = d3.select('#vis').append('svg')
