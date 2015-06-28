@@ -216,9 +216,9 @@ function gamesInYear(year) {
 
 function getGamesForTeam(teamName) {
     GAMES.forEach(function(game) {
-      //if the team we are looking for is involved in this game as home or away, add this game to team's list of games
-      if(game.hometeam === teamName || game.awayteam === teamName) { 
-        listOfAllGames.push(game); //push this game object/instance to array
-      }
+        //if the team we are looking for is involved in this game as home or away, add this game to team's list of games
+        if(game.hometeam === teamName || game.awayteam === teamName) { 
+            listOfAllGames.push(game); //push this game object/instance to array
+        }
     });
 }

@@ -18,10 +18,17 @@ $(function() {
 
 	console.log("SVG Created");
 
-
+	TeamView();
 
 });
 
+
+/* 
+Team View
+	This right here is the team view mode. 
+	It shows a teams progress thorughout a season or seasons
+	Mainly it displays wins and losses.
+*/
 function TeamView() {
 	// Set Axii, and labels
 
@@ -58,8 +65,8 @@ function TeamView() {
 
 }
 
-function TeamViewUpdate() {
-	var circles = svg.selectAll('circle').data(randomData(), function(d) {
+function TeamViewUpdate(team, year) {
+	var circles = svg.selectAll('circle').data(getGames, function(d) {
 		return d.id;
 	});
 
