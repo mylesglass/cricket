@@ -59,12 +59,13 @@ function TeamView() {
 		})
 		.text('win/loss');
 
-
-	parseDataFile('data/2008-Table1.csv', '2008');
-	update();
 }
 
 function TeamViewUpdate(team) {
+
+	update();
+
+	d3.selectAll("circle").remove();
 
 	getGamesForTeam(team);
 
@@ -98,7 +99,7 @@ function TeamViewUpdate(team) {
 
 				
 			} else if (d.winner === 'draw') {
-				//nothing
+				return (height / 2);
 			} else {
 				return (height / 2) + yRange(goalDiff);
 			}

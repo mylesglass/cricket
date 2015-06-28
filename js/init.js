@@ -41,6 +41,7 @@ $(function() {
 });
 
 function update() {
+    listOfAllGames = [];
     buildTeams();
 }
 
@@ -91,13 +92,13 @@ function parseDataFile(file, year) {
 
             // calculate winner of game
             var winner;
-            if(hscore > ascore) {
+            if(hscore === 'draw') {
+                winner = 'draw';
+            } else if(hscore > ascore) {
                 winner = d['Home Team'];
             } else if (ascore > hscore) {
                 winner = d['Away Team'];
-            } else {
-                winner = 'draw';
-            }
+            } 
 
             // Create game objects for each
             var game = {
