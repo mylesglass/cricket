@@ -90,13 +90,13 @@ $(".teamselectdropdown li").click(function(event) {
 });
 
  /*========EVENT HANDLER FOR SEASON SELECT==============**/
-$(".teamselectdropdown li").click(function(event) {
+$(".locationselectdropdown li").click(function(event) {
   selectedText = $(this).text();
   $(this).parents('.btn-group').find('.dropdown-toggle').html(selectedText+' <span class="caret"></span>');
 });
 
  /*========EVENT HANDLER FOR OPPONENT SELECT==============**/
-$(".teamselectdropdown li").click(function(event) {
+$(".opponentselectdropdown li").click(function(event) {
   selectedText = $(this).text();
   $(this).parents('.btn-group').find('.dropdown-toggle').html(selectedText+' <span class="caret"></span>');
 });
