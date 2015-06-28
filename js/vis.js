@@ -73,7 +73,9 @@ function TeamView() {
 function TeamViewUpdate(team, opponent) {
 
 	update();
-
+    listOfAllGames = [];
+    listOfAllGames2 = [];
+    
 	d3.selectAll("circle").remove();
 	d3.selectAll("path").remove();
 
@@ -221,9 +223,9 @@ function getOpponent(opponent) {
 
 
 
-	getGamesForTeam(opponent);
+	getGamesForTeam2(opponent);
 
-	var circles2 = svg.selectAll('.secondTeam').data(listOfAllGames, function(d) {
+	var circles2 = svg.selectAll('.secondTeam').data(listOfAllGames2, function(d) {
 		return d.date;
 	});
 
@@ -232,14 +234,14 @@ function getOpponent(opponent) {
 	var lineData = [];
     var x = 0;
     var x = 0;
-	var spacing = (width - (margin * 2)) / listOfAllGames.length; // x axis lenght divided by number of games
+	var spacing = (width - (margin * 2)) / listOfAllGames2.length; // x axis lenght divided by number of games
 	var count = 0;
 	var range = 33;
 	var yRange = d3.scale.linear()
 		.range([0,($('svg').height() / 2) - margin] )
 		.domain([0, range]);
 
-    	listOfAllGames.forEach(function(game) {
+    	listOfAllGames2.forEach(function(game) {
     	count++;
     	x = margin + (count * spacing);
     	var goalDiff = Math.abs(game.homescore - game.awayscore);
@@ -281,7 +283,7 @@ function getOpponent(opponent) {
 
 	/**======================================DRAW THE CIRCLES========================================**/
 	/**==============================================================================================**/
-	var spacing2 = (width - (margin * 2)) / listOfAllGames.length; // x axis lenght divided by number of games
+	var spacing2 = (width - (margin * 2)) / listOfAllGames2.length; // x axis lenght divided by number of games
 	var count2 = 0;
 	var range2 = 33;
 	var yRange2 = d3.scale.linear()
@@ -320,9 +322,9 @@ function getOpponent(opponent) {
 			return tooltip.style("visibility", "visible")
 						  .style("top", (d3.mouse(this)[1])+"px")
 						  .style("left",(d3.mouse(this)[0])+"px")
-						  .html("<strong>HomeTeam: </strong>"+listOfAllGames[i].hometeam +"<br/>"+
-						  		"<strong>AwayTeam: </strong>"+listOfAllGames[i].awayteam +"<br/>"+
-						  		"<strong>Score: </strong>"+listOfAllGames[i].homescore+"-"+listOfAllGames[i].awayscore);
+						  .html("<strong>HomeTeam: </strong>"+listOfAllGames2[i].hometeam +"<br/>"+
+						  		"<strong>AwayTeam: </strong>"+listOfAllGames2[i].awayteam +"<br/>"+
+						  		"<strong>Score: </strong>"+listOfAllGames2[i].homescore+"-"+listOfAllGames2[i].awayscore);
 
 		})
 		.on("mouseout", function(d, i) {

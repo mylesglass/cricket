@@ -15,6 +15,7 @@ var SEASONS = []; //array of seasons that are selected
 var CURRENT_TEAM;
 
 var listOfAllGames = []; //an array that holds all the games (in GAMES) for a given team
+var listOfAllGames2 = []; 
 
 var NZ = [
     'Central Pulse',
@@ -41,7 +42,6 @@ $(function() {
 });
 
 function update() {
-    listOfAllGames = [];
     buildTeams();
 }
 
@@ -213,6 +213,14 @@ function getGamesForTeam(teamName) {
         //if the team we are looking for is involved in this game as home or away, add this game to team's list of games
         if(game.hometeam === teamName || game.awayteam === teamName) { 
             listOfAllGames.push(game); //push this game object/instance to array
+        }
+    });
+}
+
+function getGamesForTeam2(teamName) {
+    GAMES.forEach(function(game) {
+        if(game.hometeam === teamName || game.awayteam === teamName) { 
+            listOfAllGames2.push(game); 
         }
     });
 }
