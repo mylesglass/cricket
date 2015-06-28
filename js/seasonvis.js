@@ -3,14 +3,15 @@
 	Ewan Moshi & Myles Glass
 **/
 
-var svg, width, height, margin, tip;
+var svg, width, height, margin, tip, x, y, xAxis, yAxis, spacing;
 
 $(function() {
 
 	// Create Drawing Area for d3
-	width = $('#vis').width();
-	height = $('body').height();
-	margin = width * 0.05;
+	margin = 20;
+	width = $('#vis').width() - (margin * 2);
+	height = 500;
+	spacing = width / 17;
 
 	svg = d3.select('#vis').append('svg')
 		.attr('width', width)
@@ -18,9 +19,14 @@ $(function() {
 
 	console.log("SVG Created");
 
-	tip = d3.tip().attr('class', 'd3-tip').html(function(d) { return d; });
+	//tip = d3.tip().attr('class', 'd3-tip').html(function(d) { return d; });
 
-	TeamView();
+	parseDataFile('data/2008-Table1.csv', '2008');
+
+
+	SeasonView();
+	UpdateSeasonView();
+	drawTeamSeason('Northern Mystics');
 
 });
 
@@ -30,99 +36,78 @@ $(function() {
 		Displays teams progression throughout a season.
 		Pretty dope tbh.
 **/
+
 function SeasonView () {
-	
+
+	x = d3.scale.linear()
+		.range([0, width])
+		.domain([0, 17]);
+
+	y = d3.scale.linear()
+		.range([height, 0])
+		.domain([0, 20]);
+
+
+	xAxis = d3.svg.axis()
+		.scale(x)
+		.orient('bottom');
+
+	yAxis = d3.svg.axis()
+		.scale(y)
+		.orient('left');
+
+	svg.append('g')
+		.attr('class', 'x axis')
+		.attr('transform', 'translate(0,' + height + ')')
+		.call(xAxis);
+
+	svg.append('g')
+		.attr('class', 'y axis')
+		.call(yAxis)
+		.append('text')
+		.attr('transform', 'rotate(-90)')
+		.attr('transform', 'translate('+margin+', 0)')
+		.attr('y', '6')	
+		.attr('dy', '.71em')
+		.style('text-anchor', 'end');
 }
 
-
-/* 
-Team View
-	This right here is the team view mode. 
-	It shows a teams progress thorughout a season or seasons
-	Mainly it displays wins and losses.
-*/
-function TeamView() {
-	// Set Axii, and labels
-
-	// x axis line
-	svg.append('line')
-		.attr('x1', margin)
-		.attr('y1', height / 2)
-		.attr('x2', width - margin)
-		.attr('y2', height / 2)
-		.attr('class', 'graph-line');
-	svg.append('text') // label
-		.attr('x', width / 2)
-		.attr('y', height - margin)
-		.text('games');
-
-	// y axis line
-	svg.append('line')
-		.attr('x1', margin)
-		.attr('y1', margin)
-		.attr('x2', margin)
-		.attr('y2', height - margin)
-		.attr('class', 'graph-line');
-	svg.append('text') //label
-		.attr('x', margin)
-		.attr('y', height / 2)
-		.attr('transform', function() {
-			return 'rotate(-90,' + (margin) + ',' + (height/2 + 5) + ')';
-		})
-		.text('win/loss');
+// Update data to make sure current filter is applied
+function UpdateSeasonView() {
+	update(); // update in init
 
 }
 
-function TeamViewUpdate(team) {
-
-	update();
-
-	
-
+function drawTeamSeason(team) {
 	getGamesForTeam(team);
 
-	// Bind nodes to date
-	var circles = svg.selectAll('circle').data(listOfAllGames, function(d) {
-		return d.date;
+	var wins = 0;
+
+	var nodes = svg.selectAll('circle').data(listOfAllGames, function(d) {
+
+		return d.round;
 	});
 
-	// 
-	var spacing = (width - (margin * 2)) / listOfAllGames.length; // x axis lenght divided by number of games
-	var count = 0;
-	var range = 25;
-	var yRange = d3.scale.linear()
-		.range([0,($('svg').height() / 2) - margin] )
-		.domain([0, range]);
-
-	circles.enter()
-		.append("circle")
-		.attr("cx", function (d) { 
-			count++;
-			return margin + (count * spacing);
+	nodes.enter()
+		.append('circle')
+		.attr('cx', function(d) {
+			var tmpx = d.round * spacing
+			return tmpx;
 		})
-		.attr("cy", function (d) { 
+		.attr('cy', function(d) {
+			if(d.winner === team)
+				wins ++;
 
-			var goalDiff = Math.abs(d.homescore - d.awayscore);
+			var tmpy = height - (wins * spacing) - margin
 
-			if(team === d.winner) {
-				console.log('winner!');
-
-				return (height / 2) - yRange(goalDiff);
-
-				
-			} else if (d.winner === 'draw') {
-				return (height / 2);
-			} else {
-				return (height / 2) + yRange(goalDiff);
-			}
-			
+			return tmpy;
 		})
-		.attr('r', 5)
-		.style("fill", "#003399")
-		.on("mouseover", function(d) {
-			var selectedNode = d3.select(this)
-				.style({opactiy: '0.5'});
+		.attr('r', 3)
+		.style('fill', function(d){
+			if(d.winner === team)
+				return 'gold';
+			else
+				return '#444444';
 		});
-
 
 }
