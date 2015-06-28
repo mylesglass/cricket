@@ -91,7 +91,7 @@ $('.btn-update').click(function(event) {
     } else if(SEASONS.length === 0) {
       alert('Please select a season');
     } else {
-      TeamViewUpdate(selectedTeam);
+      TeamViewUpdate(selectedTeam, selectedOpponent);
     }
 });
 
