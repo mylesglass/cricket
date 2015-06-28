@@ -13,6 +13,8 @@ var TEAMS = [];
 var GAMES = [];
 var SEASONS = []; //array of seasons that are selected
 
+var listOfAllGames = []; //an array that holds all the games (in GAMES) for a given team
+
 var NZ = [
     'Central Pulse',
     'Northern Mystics',
