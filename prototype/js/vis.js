@@ -60,10 +60,8 @@ function TeamView() {
 		.text('win/loss');
 
 
+	parseDataFile('data/2008-Table1.csv', '2008');
 
-	//TeamViewUpdate(prompt('Team', 'Northern Mystics'));
-
-	
 
 }
 
@@ -71,18 +69,44 @@ function TeamViewUpdate(team) {
 
 	getGamesForTeam(team);
 
-	var circles = svg.selectAll('circle').data(listOfAllGames, function(d) {
 
-		return d.id;
+	// Bind nodes to date
+	var circles = svg.selectAll('circle').data(listOfAllGames, function(d) {
+		return d.date;
 	});
 
-	circles.enter()
-		insert("svg:circle")
-	.attr("cx", function (d) { return d.value1; })
-	.attr("cy", function (d) { return d.value2; })
-	.style("fill", "red");
+	// 
+	var spacing = (width - (margin * 2)) / listOfAllGames.length; // x axis lenght divided by number of games
+	var count = 0;
+	var scale = 10;
 
-	circles.transition().duration(1000)
+	circles.enter()
+		.append("circle")
+		.attr("cx", function (d) { 
+			count++;
+			return margin + (count * spacing);
+		})
+		.attr("cy", function (d) { 
+
+			var goalDiff = Math.abs(d.homescore - d.awayscore);
+
+			if(team === d.winner) {
+				console.log('winner!');
+
+				return (height / 2) - (goalDiff * scale);
+
+				
+			} else if (d.winner === 'draw') {
+				//nothing
+			} else {
+				return (height / 2) + (goalDiff * scale);
+			}
+			
+		})
+		.attr('r', 5)
+		.style("fill", "red");
+
+	/*circles.transition().duration(1000)
 		.attr("cx", function (d) { return d.value1; })
 		.attr("cy", function (d) { return d.value2; })
 		.attr("r", function (d) { return d.value3; });
@@ -90,8 +114,8 @@ function TeamViewUpdate(team) {
 	circles.exit ()
 		.transition().duration(1000)
 		.attr("r", 0)
-	.remove ();
+		.remove ();
 
 
-	setTimeout (update, 2000);
+	setTimeout (update, 2000);*/
 }

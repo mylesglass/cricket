@@ -6,6 +6,10 @@
    * 2015
    **/
 
+var selectedTeam;
+var selectedLocation;
+var selectedOpponent;
+
 $('.btn-season').on('click', function (e) {
     /*Check state of buttons to see if they are being clicked or unclicked
       If they are being clicked, store the year and read that file, else don't read*/
@@ -81,33 +85,26 @@ $('.btn-season').on('click', function (e) {
     });
  });
 
+ /*When a drop down menu is selected, store the selected value and update the drop down menu to display selected item
+  ========EVENT HANDLER FOR TEAM SELECT==============**/
+$(".teamselectdropdown li").click(function(event) {
+  selectedTeam = $(this).text();
+  selectedText = $(this).text(); //store the selected text in a variable
+  $(this).parents('.btn-group').find('.dropdown-toggle').html(selectedText+' <span class="caret"></span>'); //update the drop down menu's text
+    TeamViewUpdate(selectedTeam);
+});
 
-/*$(".teamselectdropdown").on('click', function(e) {
-  selectedText = $(this).html();
-  alert(selectedText);
-  $(this).parents('.btn-group').find('.dropdown-toggle').html(selectedText+' <span class="caret"></span>');
-});*/
-
-/*    $(document).on('click', '.teamselectdropdown', function() {
-        selectedText = $(this).text();
-        alert(selectedText);
-
-        $(this).parents(".btn-group").find('.dropdown-toggle').text($(this).text());
-        $(this).parents(".btn-group").find('.dropdown-toggle').val($(this).text());
-
-    }); 
-
-  $(this).parents(".input-group-btn").find('.btn').text($(this).text());*/
-
-/*  /*When a drop down menu is selected, store the selected value*/
-/*$(".teamselectdropdown").click(function(event){
-  selectedText = $(this).text();
-  alert(selectedText);
-  $(this).parents('.btn-group').find('.dropdown-toggle').html(selectedText+' <span class="caret"></span>');
-});*/
-
-  /*When a drop down menu is selected, store the selected value*/
-$(".teamselectdropdown li").click(function(event){
+ /*========EVENT HANDLER FOR SEASON SELECT==============**/
+$(".locationselectdropdown li").click(function(event) {
+  selectedLocation = $(this).text();
   selectedText = $(this).text();
   $(this).parents('.btn-group').find('.dropdown-toggle').html(selectedText+' <span class="caret"></span>');
 });
+
+ /*========EVENT HANDLER FOR OPPONENT SELECT==============**/
+$(".opponentselectdropdown li").click(function(event) {
+  selectedOpponent = $(this).text();
+  selectedText = $(this).text();
+  $(this).parents('.btn-group').find('.dropdown-toggle').html(selectedText+' <span class="caret"></span>');
+});
+
