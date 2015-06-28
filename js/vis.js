@@ -59,14 +59,20 @@ function TeamView() {
 		})
 		.text('win/loss');
 
-	TeamViewUpdate();
+
+
+	//TeamViewUpdate(prompt('Team', 'Northern Mystics'));
 
 	
 
 }
 
-function TeamViewUpdate(team, year) {
-	var circles = svg.selectAll('circle').data(getGames, function(d) {
+function TeamViewUpdate(team) {
+
+	getGamesForTeam(team);
+
+	var circles = svg.selectAll('circle').data(listOfAllGames, function(d) {
+
 		return d.id;
 	});
 

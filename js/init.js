@@ -117,6 +117,7 @@ function parseDataFile(file, year) {
                 ascore = parseInt(score.substr(3,5));
             }
 
+
             // Create game objects for each
             var game = {
                 round : d['Round'],
