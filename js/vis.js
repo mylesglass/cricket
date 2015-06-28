@@ -172,6 +172,8 @@ function TeamViewUpdate(team) {
 		var tooltip = d3.select("body")
 						.append("div")
 						.style("background-color", "lightblue")
+						.style("border-radius", "8px")
+						.style("padding", "3px")
 						.style("position", "absolute")
 						.style("z-index", "10")
 						.style("visibility", "hidden");
