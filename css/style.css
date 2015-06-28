@@ -3,3 +3,8 @@
 
 #filter {
 }
+
+.graph-line {
+	stroke-width: 1px;
+	stroke: #444;
+}

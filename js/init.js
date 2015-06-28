@@ -34,17 +34,39 @@ $(function() {
     console.log('Ewan Moshi & Myles Glass');
     console.log('------------------------');
 
-    var year = prompt('Enter a year bro', '2008'); //TODO change this
+   var year = '2008';
 
     if(year !== null) {
         var file = DATAPATH + year + '-Table1.csv';
 
         parseDataFile(file, year);
 
+        year = '2009';
+        file = DATAPATH + year + '-Table1.csv';
+        parseDataFile(file, year);
+
+        year = '2010';
+        file = DATAPATH + year + '-Table1.csv';
+        parseDataFile(file, year);
+
+        year = '2011';
+        file = DATAPATH + year + '-Table1.csv';
+        parseDataFile(file, year);
+
+        year = '2012';
+        file = DATAPATH + year + '-Table1.csv';
+        parseDataFile(file, year);
+
+        year = '2013';
+        file = DATAPATH + year + '-Table1.csv';
+        parseDataFile(file, year);
+
+        buildTeams();
+
+      
+        
+
     }
-
-
-
 });
 
 /**
@@ -110,10 +132,6 @@ function parseDataFile(file, year) {
             }
         });
 
-        console.log(TEAM_NAMES);
-        console.log(GAMES[0]);
-        buildTeams();
-
     });
 
     console.log("Data File Parsed.")
@@ -178,4 +196,18 @@ function buildTeams() {
         // add to team list.
         TEAMS.push(tempTeam);
     });
+
+    console.log('Team Objects Constructed');
+}
+
+function gamesInYear(year) {
+    var gameCount = 0;
+
+    GAMES.forEach(function(game) {
+        if(game.year === year) {
+            gameCount++;
+        }
+    });
+
+    console.log('Year '+year+' contains '+gameCount+ ' games.');
 }
