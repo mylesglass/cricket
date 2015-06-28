@@ -11,6 +11,7 @@ var RAWDATA;
 var TEAM_NAMES = [];
 var TEAMS = [];
 var GAMES = [];
+var SEASONS = []; //array of seasons that are selected
 
 var NZ = [
     'Central Pulse',
@@ -33,7 +34,7 @@ $(function() {
     console.log('-Netball Visualisation--');
     console.log('Ewan Moshi & Myles Glass');
     console.log('------------------------');
-
+/*
    var year = '2008';
 
     if(year !== null) {
@@ -66,7 +67,7 @@ $(function() {
       
         
 
-    }
+    }*/
 });
 
 /**
@@ -210,4 +211,14 @@ function gamesInYear(year) {
     });
 
     console.log('Year '+year+' contains '+gameCount+ ' games.');
+}
+
+
+function getGamesForTeam(teamName) {
+    GAMES.forEach(function(game) {
+      //if the team we are looking for is involved in this game as home or away, add this game to team's list of games
+      if(game.hometeam === teamName || game.awayteam === teamName) { 
+        listOfAllGames.push(game); //push this game object/instance to array
+      }
+    });
 }
