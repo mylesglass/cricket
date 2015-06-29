@@ -72,6 +72,7 @@ function drawTeamSeason() {
 
 	d3.selectAll("circle").remove();
 	d3.selectAll("path").remove();
+	d3.selectAll("div2").remove()
 
 	//var i = 0;
 
@@ -118,7 +119,7 @@ function drawTeamSeason() {
 	                     .interpolate("linear");
 
 	     var lineColor = getColorOfLine(options[i], i);
-               
+		      
 	     var lineGraph = svg.append("path")
 	                        .attr("d", lineFunction(lineData))
 	                        .attr("stroke", lineColor)
@@ -258,8 +259,8 @@ function displayKeys(team, i) {
 	console.log(offsetX);
 
 	if(team === "Central Pulse") {
-		var keyTip1 = d3.select("body")
-						.append("div")
+		 keyTip1 = d3.select("body")
+						.append("div2")
 						.style("background-color", "gray")
 						.style("border-radius", "8px")
 						.style("padding", "3px")
@@ -270,8 +271,8 @@ function displayKeys(team, i) {
 						.html('<font size="2" color=yellow><strong>Yellow Line</font></strong> = <strong>'+team);
 	} 
 	else if(team === "Melbourne Vixens") {
-		var keyTip1 = d3.select("body")
-						.append("div")
+		 keyTip1 = d3.select("body")
+						.append("div2")
 						.style("background-color", "gray")
 						.style("border-radius", "8px")
 						.style("padding", "3px")
@@ -282,8 +283,8 @@ function displayKeys(team, i) {
 						.html('<font size="2" color=cyan><strong>Cyan Line</font></strong> = <strong>'+team);
 	}
 	else if(team === "Queensland Firebirds") {
-		var keyTip1 = d3.select("body")
-						.append("div")
+		 keyTip1 = d3.select("body")
+						.append("div2")
 						.style("background-color", "gray")
 						.style("border-radius", "8px")
 						.style("padding", "3px")
@@ -294,8 +295,8 @@ function displayKeys(team, i) {
 						.html('<font size="2" color=purple><strong>Purple Line</font></strong> = <strong>'+team);
 	}
 	else if(team === "West Coast Fever") {
-		var keyTip1 = d3.select("body")
-						.append("div")
+		 keyTip1 = d3.select("body")
+						.append("div2")
 						.style("background-color", "gray")
 						.style("border-radius", "8px")
 						.style("padding", "3px")
@@ -306,8 +307,8 @@ function displayKeys(team, i) {
 						.html('<font size="2" color=green><strong>Green Line</font></strong> = <strong>'+team);
 	}
 	else if(team === "Canterbury Tactix") {
-		var keyTip1 = d3.select("body")
-						.append("div")
+		 keyTip1 = d3.select("body")
+						.append("div2")
 						.style("background-color", "gray")
 						.style("border-radius", "8px")
 						.style("padding", "3px")
@@ -318,8 +319,8 @@ function displayKeys(team, i) {
 						.html('<font size="2" color=gray><strong>Gray Line</font></strong> = <strong>'+team);
 	}
 	else if(team === "Northern Mystics") {
-		var keyTip1 = d3.select("body")
-						.append("div")
+		 keyTip1 = d3.select("body")
+						.append("div2")
 						.style("background-color", "gray")
 						.style("border-radius", "8px")
 						.style("padding", "3px")
@@ -330,8 +331,8 @@ function displayKeys(team, i) {
 						.html('<font size="2" color=blue><strong>Blue Line</font></strong> = <strong>'+team);
 	}
 	else if(team === "Waikato Bay of Plenty Magic") {
-		var keyTip1 = d3.select("body")
-						.append("div")
+		 keyTip1 = d3.select("body")
+						.append("div2")
 						.style("background-color", "gray")
 						.style("border-radius", "8px")
 						.style("padding", "3px")
@@ -342,8 +343,8 @@ function displayKeys(team, i) {
 						.html('<font size="2" color=black><strong>Black Line</font></strong> = <strong>'+team);
 	}
 	else if(team === "New South Wales Swifts") {
-		var keyTip1 = d3.select("body")
-						.append("div")
+		 keyTip1 = d3.select("body")
+						.append("div2")
 						.style("background-color", "gray")
 						.style("border-radius", "8px")
 						.style("padding", "3px")
@@ -354,8 +355,8 @@ function displayKeys(team, i) {
 						.html('<font size="2" color=red><strong>Red Line</font></strong> = <strong>'+team);
 	}
 	else if(team === "Southern Steel") {
-		var keyTip1 = d3.select("body")
-						.append("div")
+		 keyTip1 = d3.select("body")
+						.append("div2")
 						.style("background-color", "gray")
 						.style("border-radius", "8px")
 						.style("padding", "3px")
@@ -366,8 +367,8 @@ function displayKeys(team, i) {
 						.html('<font size="2" color=lightblue><strong>LightBlue Line</font></strong> = <strong>'+team);
 	}
 	else if(team === "Adelaide Thunderbirds") {
-		var keyTip1 = d3.select("body")
-						.append("div")
+		 keyTip1 = d3.select("body")
+						.append("div2")
 						.style("background-color", "gray")
 						.style("border-radius", "8px")
 						.style("padding", "3px")
