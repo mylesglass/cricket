@@ -110,7 +110,7 @@ function drawTeamSeason() {
 		 	.range([0,($('svg').height() / 2) - margin] )
 		 	.domain([0, dmain]);
 
-	    	listOfAllGames.forEach(function(game) {
+	    listOfAllGames.forEach(function(game) {
 	     	x = game.round * spacing;
 	     	if(team === game.winner) {
 		 		count++;
@@ -122,7 +122,7 @@ function drawTeamSeason() {
 	             y : y,
 	         };
 	        lineData.push(point);
-	    	});
+	    });
 
 		 var lineFunction = d3.svg.line()
 	                    .x(function(d) { return d.x; })
@@ -155,7 +155,6 @@ function drawTeamSeason() {
 		 		if(d.winner === team) {
 		 			wins ++;
 		 		}
-
 		 		var tmpy = height - (wins * (spacing / 2)) - margin
 
 		 		return tmpy;

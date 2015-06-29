@@ -45,14 +45,13 @@ $('.btn-update-season').click(function(event) {
     } else {
         console.log("Season chosen: " + selectedSeason);
         parseDataFile(DATAPATH + selectedSeason + '-Table1.csv');
-        // update();
-        // options.forEach(function(team) {
-        //     drawTeamSeason(team, selectedSeason);
-        // });
+
         drawTeamSeason();
         GAMES.length = 0;
         listOfAllGames.length = 0;
     }
 });
+
+
 
 
