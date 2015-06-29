@@ -243,10 +243,15 @@ function displayKeys(team, i) {
 		offsetY = 100;
 		offsetX = margin + 40;
 	}
-	else if(i === 5) { //once there are 4 things selected, move x over and reset offsetY to 100
+	else if(keyCounter === 4) { //once there are 4 things selected, move x over and reset offsetY to 100
 		keyCounter = 1;
 	 	offsetY = 100;
 	 	offsetX = margin + 350;
+	}
+	else if(i === 8) {
+		keyCounter = 1;
+		offsetY = 100;
+		offsetX = margin + 700;
 	}
 	else {
 		keyCounter = keyCounter + 1;
