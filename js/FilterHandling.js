@@ -131,4 +131,9 @@ $(".opponentselectdropdown li").click(function(event) {
 });
 
 
-
+/*===============VIEW SELECTION===============*/
+$(".viewselect li").click(function(event) {
+  $(this).parents('.btn-group').find('.dropdown-toggle').html(selectedText+' <span class="caret"></span>'); //update the drop down menu's text
+  $('#div').load('SeasonView.html');
+  //window.open("SeasonView.html");
+});
