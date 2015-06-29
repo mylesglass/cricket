@@ -3,7 +3,7 @@
 	Ewan Moshi & Myles Glass
 **/
 
-var svg, width, height, margin, tip, x, y, xAxis, yAxis, spacing;
+var svg, width, height, margin, tip, x, y, xAxis, yAxis, spacing, keyCounter;
 
 $(function() {
 
@@ -238,20 +238,24 @@ function displayKeys(team, i) {
 
 	/*For the first one, set offsetY to 100*/
 	if(i === 1) {
+		keyCounter = i;
 		offsetY = 100;
 		offsetX = margin + 40;
 	}
 	else if(i === 5) { //once there are 4 things selected, move x over and reset offsetY to 100
+		keyCounter = 1;
 	 	offsetY = 100;
 	 	offsetX = margin + 350;
 	}
-	else { //set offSetY to 65 at all other times
+	else {
+		keyCounter = keyCounter + 1;
 		offsetY = 65;
 	}
 
+	/*Debugging*/
 	console.log(i);
-console.log(offsetY);
-console.log(offsetX);
+	console.log(offsetY);
+	console.log(offsetX);
 
 	if(team === "Central Pulse") {
 		var keyTip1 = d3.select("body")
@@ -261,7 +265,7 @@ console.log(offsetX);
 						.style("padding", "3px")
 						.style("position", "absolute")
 						.style("z-index", "10")
-						.style("top", (height + (offsetY * i))+"px")
+						.style("top", (height + (offsetY * keyCounter))+"px")
 						.style("left", (offsetX)+"px")
 						.html('<font size="2" color=yellow><strong>Yellow Line</font></strong> = <strong>'+team);
 	} 
@@ -273,7 +277,7 @@ console.log(offsetX);
 						.style("padding", "3px")
 						.style("position", "absolute")
 						.style("z-index", "10")
-						.style("top", (height + (offsetY * i))+"px")
+						.style("top", (height + (offsetY * keyCounter))+"px")
 						.style("left", (offsetX)+"px")
 						.html('<font size="2" color=cyan><strong>Cyan Line</font></strong> = <strong>'+team);
 	}
@@ -285,7 +289,7 @@ console.log(offsetX);
 						.style("padding", "3px")
 						.style("position", "absolute")
 						.style("z-index", "10")
-						.style("top", (height + (offsetY * i)) +"px")
+						.style("top", (height + (offsetY * keyCounter)) +"px")
 						.style("left", (offsetX)+"px")
 						.html('<font size="2" color=purple><strong>Purple Line</font></strong> = <strong>'+team);
 	}
@@ -297,7 +301,7 @@ console.log(offsetX);
 						.style("padding", "3px")
 						.style("position", "absolute")
 						.style("z-index", "10")
-						.style("top", (height + (offsetY * i))+"px")
+						.style("top", (height + (offsetY * keyCounter))+"px")
 						.style("left", (offsetX)+"px")
 						.html('<font size="2" color=green><strong>Green Line</font></strong> = <strong>'+team);
 	}
@@ -309,7 +313,7 @@ console.log(offsetX);
 						.style("padding", "3px")
 						.style("position", "absolute")
 						.style("z-index", "10")
-						.style("top", (height + (offsetY * i))+"px")
+						.style("top", (height + (offsetY * keyCounter))+"px")
 						.style("left", (offsetX)+"px")
 						.html('<font size="2" color=gray><strong>Gray Line</font></strong> = <strong>'+team);
 	}
@@ -321,7 +325,7 @@ console.log(offsetX);
 						.style("padding", "3px")
 						.style("position", "absolute")
 						.style("z-index", "10")
-						.style("top", (height + (offsetY * i))+"px")
+						.style("top", (height + (offsetY * keyCounter))+"px")
 						.style("left", (offsetX)+"px")
 						.html('<font size="2" color=blue><strong>Blue Line</font></strong> = <strong>'+team);
 	}
@@ -333,7 +337,7 @@ console.log(offsetX);
 						.style("padding", "3px")
 						.style("position", "absolute")
 						.style("z-index", "10")
-						.style("top", (height + (offsetY * i))+"px")
+						.style("top", (height + (offsetY * keyCounter))+"px")
 						.style("left", (offsetX)+"px")
 						.html('<font size="2" color=black><strong>Black Line</font></strong> = <strong>'+team);
 	}
@@ -345,7 +349,7 @@ console.log(offsetX);
 						.style("padding", "3px")
 						.style("position", "absolute")
 						.style("z-index", "10")
-						.style("top", (height + (offsetY * i))+"px")
+						.style("top", (height + (offsetY * keyCounter))+"px")
 						.style("left", (offsetX)+"px")
 						.html('<font size="2" color=red><strong>Red Line</font></strong> = <strong>'+team);
 	}
@@ -357,7 +361,7 @@ console.log(offsetX);
 						.style("padding", "3px")
 						.style("position", "absolute")
 						.style("z-index", "10")
-						.style("top", (height + (offsetY * i))+"px")
+						.style("top", (height + (offsetY * keyCounter))+"px")
 						.style("left", (offsetX)+"px")
 						.html('<font size="2" color=lightblue><strong>LightBlue Line</font></strong> = <strong>'+team);
 	}
@@ -369,7 +373,7 @@ console.log(offsetX);
 						.style("padding", "3px")
 						.style("position", "absolute")
 						.style("z-index", "10")
-						.style("top", (height + (offsetY * i))+"px")
+						.style("top", (height + (offsetY * keyCounter))+"px")
 						.style("left", (offsetX)+"px")
 						.html('<font size="2" color=pink><strong>Pink Line</font></strong> = <strong>'+team);
 	}
