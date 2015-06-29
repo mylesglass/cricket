@@ -1,6 +1,10 @@
 var options = [];
 var selectedSeason, selectedText;
 
+$( document ).ready(function() {
+    options = [];
+});
+
 $( '.dropdown-menu-seasons a' ).on( 'click', function( event ) {
 
    var $target = $( event.currentTarget ),
@@ -42,10 +46,13 @@ $('.btn-update-season').click(function(event) {
     } else {
         console.log("Season chosen: " + selectedSeason);
         parseDataFile(DATAPATH + selectedSeason + '-Table1.csv');
-        update();
-        options.forEach(function(team) {
-            drawTeamSeason(team);
-        });
+        // update();
+        // options.forEach(function(team) {
+        //     drawTeamSeason(team, selectedSeason);
+        // });
+        for(var i = 0; i < options.length; i++) {
+           drawTeamSeason(options[i], selectedSeason);
+        }
 
     }
 });

@@ -70,36 +70,49 @@ function SeasonView () {
 		.style('text-anchor', 'end');
 }
 
-function drawTeamSeason(team) {
-	getGamesForTeam(team);
+var selected_Season;
 
-	var wins = 0;
+function drawTeamSeason() {
 
-	var nodes = svg.selectAll('circle').data(listOfAllGames, function(d) {
+	update();
 
-		return d.round;
-	});
+	listOfAllGames = [];
+	
+	d3.selectAll("circle").remove();
 
-	nodes.enter()
-		.append('circle')
-		.attr('cx', function(d) {
-			var tmpx = d.round * spacing
-			return tmpx;
-		})
-		.attr('cy', function(d) {
-			if(d.winner === team)
-				wins ++;
+	var i = 0;
+    options.forEach(function(team, i) {
+		getGamesForTeam(team);
 
-			var tmpy = height - (wins * spacing) - margin
+		var wins = 0;
 
-			return tmpy;
-		})
-		.attr('r', 3)
-		.style('fill', function(d){
-			if(d.winner === team)
-				return 'gold';
-			else
-				return '#444444';
+		var nodes = svg.selectAll('team'+i).data(listOfAllGames, function(d) {
+			return d.round;
 		});
 
+		nodes.enter()
+			.append('circle')
+			.attr('class', 'team'+i)
+			.attr('cx', function(d) {
+				var tmpx = d.round * spacing
+				return tmpx;
+			})
+			.attr('cy', function(d) {
+				if(d.winner === team) {
+					wins ++;
+				}
+
+				var tmpy = height - (wins * spacing) - margin
+
+				return tmpy;
+			})
+			.attr('r', 3)
+			.style('fill', function(d){
+				if(d.winner === team)
+					return 'gold';
+				else
+					return '#444444';
+			});
+			i = i + 1;
+     });
 }
