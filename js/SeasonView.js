@@ -33,9 +33,6 @@ $('.dropdown-season li').click(function(event) {
     console.log(selectedText);
     // Change toggle to name of selected season
     $(this).parents('.btn-group').find('.dropdown-toggle').html(selectedText+' <span class="caret"></span>');
-
-    var file = DATAPATH + selectedSeason + '-Table1.csv';
-    parseDataFile(file, selectedSeason); //parse current season 
 });
 
 
@@ -53,7 +50,7 @@ $('.btn-update-season').click(function(event) {
         //     drawTeamSeason(team, selectedSeason);
         // });
       drawTeamSeason();
-      GAMES = [];
-      listOfAllGames = [];
+       GAMES.length = 0;
+       listOfAllGames.length = 0;
     }
 });

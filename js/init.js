@@ -129,7 +129,6 @@ function buildTeams() {
 
     // for each unique team we found on file
     TEAM_NAMES.forEach(function(team) {
-
         // create a bunch of variables
         var venue, country;
         var wins = 0;
