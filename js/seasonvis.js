@@ -146,7 +146,8 @@ function drawTeamSeason() {
 
 		 		return tmpy;
 		 	})
-		 	.attr('r', 3)
+		 	.attr('r', 4)
+		 	.style("stroke", "black")
 		 	.style('fill', function(d){
 		 		if(d.winner === team)
 		 			return 'gold';
@@ -157,8 +158,8 @@ function drawTeamSeason() {
 				return tooltip.style("visibility", "visible")
 						  .style("top", (d3.mouse(this)[1])+"px")
 						  .style("left",(d3.mouse(this)[0])+"px")
-						  .html("<strong>HomeTeam: </strong>"+d.homescore);
-
+						  .html("<strong>"+d.hometeam+": </strong>"+d.homescore +"<br/>"+
+						  		"<strong>"+d.awayteam+": </strong>"+d.awayscore +"<br/>");
 			})
 			.on("mouseout", function(d, i) {
 				return tooltip.style("visibility", "hidden");
