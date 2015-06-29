@@ -74,6 +74,7 @@ function drawTeamSeason() {
 	update();
 	
 	d3.selectAll("circle").remove();
+	d3.selectAll("path").remove();
 
 	var i = 0;
 
@@ -90,6 +91,56 @@ function drawTeamSeason() {
 		var nodes = svg.selectAll('team'+i).data(listOfAllGames, function(d) {
 			return d.round;
 		});
+		
+
+		var lineData = [];
+	    var x = 0;
+	    var x = 0;
+		var spacing = (width - (margin * 2)) / listOfAllGames.length; // x axis lenght divided by number of games
+		var count = 0;
+		var dmain = 33;
+		var yRange = d3.scale.linear()
+			.range([0,($('svg').height() / 2) - margin] )
+			.domain([0, dmain]);
+
+	    	listOfAllGames.forEach(function(game) {
+	    	x = game.round * spacing;
+	    	if(team === game.winner) {
+				count++;
+			} 
+			y = height - (count * spacing) - margin;
+			 // create team object
+	        var point = {
+	            x : x,
+	            y : y,
+	        };
+
+	        lineData.push(point);
+	   	});
+
+		var lineFunction = d3.svg.line()
+	                    .x(function(d) { return d.x; })
+	                    .y(function(d) { return d.y; })
+	                    .interpolate("linear");
+
+	    var lineGraph = svg.append("path")
+	                       .attr("d", lineFunction(lineData))
+	                       .attr("stroke", "blue")
+	                       .attr("stroke-width", 2)
+	                       .attr("fill", "none")
+	                       .transition()
+		            			.duration(3000)
+	    	        			.attrTween("stroke-dasharray", function() {
+	        				        var len = this.getTotalLength();
+	                				return function(t) {
+	                					return (d3.interpolateString("0," + len, len + ",0"))(t)
+	                				};
+	                			});
+
+
+
+
+
 
 		nodes.enter()
 			.append('circle')
