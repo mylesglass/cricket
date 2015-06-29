@@ -49,8 +49,10 @@ $('.btn-update-season').click(function(event) {
         // options.forEach(function(team) {
         //     drawTeamSeason(team, selectedSeason);
         // });
-      drawTeamSeason();
-       GAMES.length = 0;
-       listOfAllGames.length = 0;
+        drawTeamSeason();
+        GAMES.length = 0;
+        listOfAllGames.length = 0;
     }
 });
+
+
