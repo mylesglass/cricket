@@ -21,9 +21,6 @@ $(function() {
 
 	//tip = d3.tip().attr('class', 'd3-tip').html(function(d) { return d; });
 
-	parseDataFile('data/2008-Table1.csv', '2008');
-
-
 	SeasonView();
 
 });
@@ -74,15 +71,18 @@ var selected_Season;
 
 function drawTeamSeason() {
 
-	update();
 
-	listOfAllGames = [];
+	update();
 	
 	d3.selectAll("circle").remove();
 
 	var i = 0;
     options.forEach(function(team, i) {
+    	listOfAllGames = [];
+
 		getGamesForTeam(team);
+
+		GAMES = [];
 
 		var wins = 0;
 
