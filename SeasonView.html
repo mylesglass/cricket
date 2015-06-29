@@ -33,14 +33,26 @@
 	<!-- Main Container -->
         <div class="container-fluid">
 
+        <div id="header" class="row">
+            <div class="col-md-12">
+                <br>
+                <ul class="nav nav-tabs">
+                    <li role="presentation"><a href="index.html">Team View</a></li>
+                    <li role="presentation" class="active"><a href="SeasonView.html">Season View</a></li>
+                </ul>
+            </div>
+        </div>
+
 	    <div class="row">
-		<div id="vis" class="col-md-8">
-		    <h1>Season View</h1>
+		<div id="vis" class="col-md-9">
+
 		</div>
 
-		<div id="filter" class="col-md-4">
+		<div id="filter" class="col-md-3">
 		<h1><strong>Filter</strong></h1>
-
+        <p>
+            Select at least one team and a season, then press the update button to see a view of how the selected team/s performed for that season.
+        </p>
 
 		<!-- Teams Select -->
 
@@ -50,7 +62,7 @@
 			<button type="button" class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 				Select Teams  <span class="caret"></span>
 			</button>
-		
+
 			<ul class="dropdown-menu dropdown-menu-seasons">
 				<li>
 					<a href="#"  data-value="Central Pulse">
@@ -122,8 +134,10 @@
 			      <li><a href="#">2013</a></li>
 			</ul>
 		    </div>
-
-		    <button class="btn btn-default btn-lg btn-update-season" type="button">
+        </br>
+        </br>
+        </br>
+		    <button class="btn btn-primary btn-lg btn-update-season" type="button">
 		    	Update <span class="glyphicon glyphicon-refresh"></span>
 		    </button>
 		 </div>
@@ -141,7 +155,7 @@
 
         <script src="js/SeasonView.js"></script>
 
-		<script src="js/FilterHandling.js"></script> 
+		<script src="js/FilterHandling.js"></script>
 
         <script src="js/seasonvis.js"></script>
 

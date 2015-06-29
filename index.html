@@ -33,17 +33,19 @@
 	<!-- Main Container -->
         <div class="container-fluid">
 
+            <div id="header" class="row">
+                <div class="col-md-12">
+                    <br>
+                    <ul class="nav nav-tabs">
+                        <li role="presentation" class="active"><a href="index.html">Team View</a></li>
+                        <li role="presentation"><a href="SeasonView.html">Season View</a></li>
+                    </ul>
+                </div>
+            </div>
+
 	    <div class="row">
 		<div id="vis" class="col-md-8">
-		<div class="btn-group btn-team">
-			<button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-			    Team View <span class="caret"></span>
-			</button>
-			<ul class="dropdown-menu viewselect" role="menu">
-			      <li><a href="#">Team View</a></li>
-			      <li><a href="#">Season View</a></li>
-			</ul>
-		    </div>
+
 		</div>
 
 		<div id="filter" class="col-md-4">
@@ -110,7 +112,7 @@
 		      <button type="button" class="btn btn-primary btn-season" data-toggle="button">2013</button>
 		    </div>
 
-		    
+
 		    <button class="btn btn-default btn-lg btn-update-team" type="button">
 		    	Update <span class="glyphicon glyphicon-refresh"></span>
 		    </button>
@@ -118,7 +120,7 @@
 	    </div>
 
         </div>
-        
+
         <!-- JavaScript Files -->
         <script src="js/libs/jquery.js"></script>
         <script src="js/libs/jquery-csv.js"></script>
@@ -127,7 +129,7 @@
 
         <script src="js/init.js"></script>
 
-		<script src="js/FilterHandling.js"></script> 
+		<script src="js/FilterHandling.js"></script>
 
         <script src="js/vis.js"></script>
 

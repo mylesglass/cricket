@@ -10,7 +10,7 @@ $(function() {
 	// Create Drawing Area for d3
 	margin = 20;
 	width = $('#vis').width() - (margin * 2);
-	height = 500;
+	height = $('#vis').height();
 	spacing = width / 17;
 
 	svg = d3.select('#vis').append('svg')
@@ -62,7 +62,7 @@ function SeasonView () {
 		.append('text')
 		.attr('transform', 'rotate(-90)')
 		.attr('transform', 'translate('+margin+', 0)')
-		.attr('y', '6')	
+		.attr('y', '6')
 		.attr('dy', '.71em')
 		.style('text-anchor', 'end');
 }
@@ -102,7 +102,7 @@ function drawTeamSeason() {
 	     	x = game.round * spacing;
 	     	if(team === game.winner) {
 		 		count++;
-		 	} 
+		 	}
 		 	y = height - (count * spacing) - margin;
 		 	 // create team object
 	        var point = {
@@ -118,7 +118,7 @@ function drawTeamSeason() {
 	                     .interpolate("linear");
 
 	     var lineColor = getColorOfLine(options[i], i);
-               
+
 	     var lineGraph = svg.append("path")
 	                        .attr("d", lineFunction(lineData))
 	                        .attr("stroke", lineColor)
@@ -155,7 +155,7 @@ function drawTeamSeason() {
 		 			return 'gold';
 		 		else
 		 			return '#444444';
-		 	})		
+		 	})
 		 	.on("mouseover", function(d, i) {
 				return tooltip.style("visibility", "visible")
 						  .style("top", (d3.mouse(this)[1])+"px")
@@ -201,35 +201,35 @@ function getColorOfLine(team, i) {
 	     else if (team == "West Coast Fever") {
 	     	lineColor = "green";
 	     	displayKeys(team, i);
-	     }	     
+	     }
 	     else if (team == "Canterbury Tactix") {
 	     	lineColor = "gray";
 	     	displayKeys(team, i);
-	     }	     
+	     }
 	     else if (team == "Northern Mystics") {
 	     	lineColor = "blue";
 	     	displayKeys(team, i);
-	     }	     
+	     }
 	     else if (team == "Waikato Bay of Plenty Magic") {
 	     	lineColor = "black";
 	     	displayKeys(team, i);
-	     }	     
+	     }
 	     else if (team == "New South Wales Swifts") {
 	     	lineColor = "red";
 	     	displayKeys(team, i);
 
-	     }	     
+	     }
 	     else if (team == "Southern Steel") {
 	     	lineColor = "lightblue";
 	     	displayKeys(team, i);
 
-	     }	     
+	     }
 	     else if (team == "Adelaide Thunderbirds") {
 	     	lineColor = "pink";
 	     	displayKeys(team, i);
 
-	     }	  
-	     return lineColor;   
+	     }
+	     return lineColor;
 }
 
 function displayKeys(team, i) {
@@ -250,8 +250,8 @@ function displayKeys(team, i) {
 	}
 
 	console.log(i);
-console.log(offsetY);
-console.log(offsetX);
+	console.log(offsetY);
+	console.log(offsetX);
 
 	if(team === "Central Pulse") {
 		var keyTip1 = d3.select("body")
@@ -264,7 +264,7 @@ console.log(offsetX);
 						.style("top", (height + (offsetY * i))+"px")
 						.style("left", (offsetX)+"px")
 						.html('<font size="2" color=yellow><strong>Yellow Line</font></strong> = <strong>'+team);
-	} 
+	}
 	else if(team === "Melbourne Vixens") {
 		var keyTip1 = d3.select("body")
 						.append("div")
