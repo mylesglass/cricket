@@ -152,7 +152,26 @@ function drawTeamSeason() {
 		 			return 'gold';
 		 		else
 		 			return '#444444';
-		 	});
+		 	})		
+		 	.on("mouseover", function(d, i) {
+				return tooltip.style("visibility", "visible")
+						  .style("top", (d3.mouse(this)[1])+"px")
+						  .style("left",(d3.mouse(this)[0])+"px")
+						  .html("<strong>HomeTeam: </strong>"+d.homescore);
+
+			})
+			.on("mouseout", function(d, i) {
+				return tooltip.style("visibility", "hidden");
+			});
+
+			var tooltip = d3.select("body")
+							.append("div")
+							.style("background-color", "lightblue")
+							.style("border-radius", "8px")
+							.style("padding", "3px")
+							.style("position", "absolute")
+							.style("z-index", "10")
+							.style("visibility", "hidden");
 		 	//i = i + 1;
 		 	listOfAllGames = [];
 
