@@ -70,19 +70,20 @@ function SeasonView () {
 var selected_Season;
 
 function drawTeamSeason() {
-
-
+	
 	update();
 	
 	d3.selectAll("circle").remove();
 
 	var i = 0;
+
     options.forEach(function(team, i) {
     	listOfAllGames = [];
 
 		getGamesForTeam(team);
 
-		GAMES = [];
+		console.log('list of all games '+listOfAllGames.length);
+		console.log('Games length '+GAMES.length);
 
 		var wins = 0;
 

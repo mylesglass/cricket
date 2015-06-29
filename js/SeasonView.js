@@ -53,5 +53,7 @@ $('.btn-update-season').click(function(event) {
         //     drawTeamSeason(team, selectedSeason);
         // });
       drawTeamSeason();
+      GAMES = [];
+      listOfAllGames = [];
     }
 });
