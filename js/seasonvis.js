@@ -117,9 +117,11 @@ function drawTeamSeason() {
 	                     .y(function(d) { return d.y; })
 	                     .interpolate("linear");
 
+	     var lineColor = getColorOfLine(options[i]);
+               
 	     var lineGraph = svg.append("path")
 	                        .attr("d", lineFunction(lineData))
-	                        .attr("stroke", "blue")
+	                        .attr("stroke", lineColor)
 	                        .attr("stroke-width", 2)
 	                        .attr("fill", "none")
 	                        .transition()
@@ -177,4 +179,42 @@ function drawTeamSeason() {
 		 	listOfAllGames = [];
 
      });
+}
+
+/**
+ * A method that returns a color
+ * based on which team is currently selected
+ */
+function getColorOfLine(team) {
+		 if(team == "Central Pulse") {
+	     	lineColor = "yellow";
+	     }
+	     else if (team == "Melbourne Vixens") {
+	     	lineColor = "cyan";
+	     }
+	     else if (team == "Queensland Firebirds") {
+	     	lineColor = "purple";
+	     }
+	     else if (team == "West Coast Fever") {
+	     	lineColor = "green";
+	     }	     
+	     else if (team == "Canterbury Tactix") {
+	     	lineColor = "gray";
+	     }	     
+	     else if (team == "Northern Mystics") {
+	     	lineColor = "blue";
+	     }	     
+	     else if (team == "Waikato Bay of Plenty Magic") {
+	     	lineColor = "black";
+	     }	     
+	     else if (team == "New South Wales Swifts") {
+	     	lineColor = "red";
+	     }	     
+	     else if (team == "Southern Steel") {
+	     	lineColor = "lightblue";
+	     }	     
+	     else if (team == "Adelaide Thunderbirds") {
+	     	lineColor = "pink";
+	     }	  
+	     return lineColor;   
 }
