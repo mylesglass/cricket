@@ -4,6 +4,9 @@
 
 #filter {
 	background-color: #DEDEDE;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
 	min-height: 86vh;
 }
 

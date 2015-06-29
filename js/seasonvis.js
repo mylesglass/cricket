@@ -65,6 +65,17 @@ function SeasonView () {
 		.attr('y', '6')
 		.attr('dy', '.71em')
 		.style('text-anchor', 'end');
+
+		svg.append('line')
+			.attr('x1', margin)
+			.attr('y1', height)
+			.attr('x2', width - margin)
+			.attr('y2', height)
+			.attr('class', 'graph-line');
+		svg.append('text') // label
+			.attr('x', width / 2)
+			.attr('y', height + 10)
+			.text('Round');
 }
 
 
@@ -104,7 +115,7 @@ function drawTeamSeason() {
 	     	if(team === game.winner) {
 		 		count++;
 		 	}
-		 	y = height - (count * spacing) - margin;
+		 	y = height - (count * (spacing/2)) - margin;
 		 	 // create team object
 	        var point = {
 	             x : x,
@@ -145,7 +156,7 @@ function drawTeamSeason() {
 		 			wins ++;
 		 		}
 
-		 		var tmpy = height - (wins * spacing) - margin
+		 		var tmpy = height - (wins * (spacing / 2)) - margin
 
 		 		return tmpy;
 		 	})
@@ -321,7 +332,7 @@ function displayKeys(team, i) {
 						.style("z-index", "10")
 						.style("top", (height + (offsetY * keyCounter))+"px")
 						.style("left", (offsetX)+"px")
-						.html('<font size="2" color=gray><strong>Gray Line</font></strong> = <strong>'+team);
+						.html('<font size="2" color=#444><strong>Gray Line</font></strong> = <strong>'+team);
 	}
 	else if(team === "Northern Mystics") {
 		 keyTip1 = d3.select("body")
