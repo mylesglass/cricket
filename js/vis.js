@@ -68,6 +68,19 @@ function TeamView() {
 			return 'rotate(-90,' + (margin) + ',' + (height/2 + 5) + ')';
 		})
 		.text('Loss');
+
+		svg.append('text') //label
+		.attr('x', margin - 40)
+		.attr('y', height / 2 - 20)
+		.attr('transform', function() {
+			return 'rotate(-90,' + (margin) + ',' + (height/2 + 5) + ')';
+		})
+		.text('(Goal Difference)');
+
+		svg.append('text') //label
+		.attr('x', margin - 13)
+		.attr('y', height / 2 + 4)
+		.text('0');
 }
 
 function TeamViewUpdate(team, opponent) {
